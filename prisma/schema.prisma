@@ -1,0 +1,203 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider               = "zod-prisma-types"
+  output                 = "../generated/zod"
+  createInputTypes       = false
+  addInputValidationType = fasle
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  /// Unique identifier for the user.
+  id                  String              @id @default(cuid())
+  /// Timestamp of user creation.
+  created_at          DateTime            @default(now())
+  /// Timestamp of the last user update.
+  updated_at          DateTime            @updatedAt
+  /// Current status of the user (e.g., 'verified', 'unverified'). 
+  status              String              @default("unverified") /// @zod.string.regex(/^(unverified|verified)$/)
+  /// Credentials associated with the user (email, phone, etc.).
+  credentials         Credential[]
+  /// Personally identifiable information (PII) of the user.
+  pii                 Pii[]
+  /// Login attempts made by the user.
+  login_attempts      LoginAttempt[]
+  /// Active sessions of the user.
+  sessions            Session[]
+  /// Verification tokens for email or phone verification.
+  verification_tokens VerificationToken[]
+  /// Roles assigned to the user.
+  user_roles          UserRoles[]
+
+  @@map("users")
+}
+
+model Credential {
+  /// Unique identifier for the credential.
+  id         String   @id @default(cuid())
+  /// Timestamp of credential creation.
+  created_at DateTime @default(now())
+  /// Timestamp of the last credential update.
+  updated_at DateTime @updatedAt
+  /// ID of the user this credential belongs to.
+  user_id    String
+  /// Type of credential (e.g., 'email', 'phone').
+  type       String
+  /// Value of the credential (e.g., email address, phone number).
+  value      String
+  /// The user this credential is associated with.
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@map("credentials")
+}
+
+model Pii {
+  /// Unique identifier for the personally identifiable information (PII).
+  id         String   @id @default(cuid())
+  /// Timestamp of PII creation.
+  created_at DateTime @default(now())
+  /// Timestamp of the last PII update.
+  updated_at DateTime @updatedAt
+  /// ID of the user this PII belongs to.
+  user_id    String
+  /// Type of PII (e.g., 'full_name', 'date_of_birth').
+  type       String
+  /// Encrypted value of the PII.
+  value      String
+  /// The user this PII is associated with.
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@map("pii")
+}
+
+model LoginAttempt {
+  /// Unique identifier for the login attempt.
+  id         String   @id @default(cuid())
+  /// Timestamp of the login attempt.
+  created_at DateTime @default(now())
+  /// Timestamp of the last login attempt update.
+  updated_at DateTime @updatedAt
+  /// ID of the user who made the login attempt.
+  user_id    String
+  /// Indicates whether the login attempt was successful.
+  success    Boolean
+  /// The user who made the login attempt.
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@map("login_attempts")
+}
+
+model VerificationToken {
+  /// Unique identifier for the verification token.
+  id         String   @id @default(cuid())
+  /// Timestamp of token creation.
+  created_at DateTime @default(now())
+  /// Timestamp of the last token update.
+  updated_at DateTime @updatedAt
+  /// ID of the user this token belongs to.
+  user_id    String
+  /// Token value used for verification.
+  token      String
+  /// Type of verification (e.g., 'email', 'phone').
+  type       String
+  /// The user this token is associated with.
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@map("magic_links")
+}
+
+model Session {
+  /// Unique identifier for the session.
+  id         String   @id @default(cuid())
+  /// Timestamp of session creation.
+  created_at DateTime @default(now())
+  /// Timestamp of the last session update.
+  updated_at DateTime @updatedAt
+  /// ID of the user this session belongs to.
+  user_id    String
+  /// The user this session is associated with.
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@map("sessions")
+}
+
+model Role {
+  /// Unique identifier for the role.
+  id               String            @id @default(cuid())
+  /// Timestamp of role creation.
+  created_at       DateTime          @default(now())
+  /// Timestamp of the last role update.
+  updated_at       DateTime          @updatedAt
+  /// Name of the role (e.g., 'admin', 'user').
+  name             String
+  /// Description of the role and its purpose.
+  description      String
+  /// Permissions associated with this role.
+  role_permissions RolePermissions[]
+  /// Users assigned to this role.
+  user_roles       UserRoles[]
+
+  @@map("roles")
+}
+
+model Permission {
+  /// Unique identifier for the permission.
+  id                String            @id @default(cuid())
+  /// Timestamp of permission creation.
+  created_at        DateTime          @default(now())
+  /// Timestamp of the last permission update.
+  updated_at        DateTime          @updatedAt
+  /// Name of the permission (e.g., 'create_post', 'edit_user').
+  name              String
+  /// Description of the permission.
+  description       String
+  /// Roles that have this permission.
+  roles_permissions RolePermissions[]
+
+  @@map("permissions")
+}
+
+model RolePermissions {
+  /// Unique identifier for the association between a role and a permission.
+  id            String     @id @default(cuid())
+  /// Timestamp of the association creation.
+  created_at    DateTime   @default(now())
+  /// Timestamp of the last association update.
+  updated_at    DateTime   @updatedAt
+  /// The role ID in this association.
+  role_id       String
+  /// The permission ID in this association.
+  permission_id String
+  /// The role in this association.
+  role          Role       @relation(fields: [role_id], references: [id])
+  /// The permission in this association.
+  permission    Permission @relation(fields: [permission_id], references: [id])
+}
+
+model UserRoles {
+  /// Unique identifier for the association between a user and a role.
+  id      String @id @default(cuid())
+  /// The user ID in this association.
+  user_id String
+  /// The user in this association.
+  user    User   @relation(fields: [user_id], references: [id])
+  /// The role ID in this association.
+  role_id String
+  /// The role in this association.
+  role    Role   @relation(fields: [role_id], references: [id])
+
+  @@map("user_roles")
+}
