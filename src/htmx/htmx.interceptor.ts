@@ -2,7 +2,6 @@ import {
   CallHandler,
   ExecutionContext,
   Injectable,
-  Logger,
   NestInterceptor,
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
@@ -10,7 +9,7 @@ import { map, Observable } from 'rxjs';
 import { HtmlDoc } from '@core/layouts';
 import { isHtmlFragment } from './htmx.utils';
 import { ConfigService } from '@nestjs/config';
-import { Config } from '@core/config';
+import { Config } from '@core/config/app';
 
 @Injectable()
 export class HtmxInterceptor implements NestInterceptor {

@@ -2,12 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
-import * as session from 'express-session';
+import session from 'express-session';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { Config } from './config/app';
 import helmet from 'helmet';
-import * as colors from 'picocolors';
+import colors from 'picocolors';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { patchNestjsSwagger } from '@anatine/zod-nestjs';
 import { HtmxInterceptor } from './htmx/htmx.interceptor';
@@ -41,7 +41,7 @@ async function bootstrap() {
   patchNestjsSwagger();
   const document = SwaggerModule.createDocument(app, swaggerConfig, {});
   SwaggerModule.setup('/api', app, document);
-  const pathname = join(__dirname, '..', '..', 'public');
+  const pathname = join(__dirname, '..', 'public');
 
   app.useStaticAssets(pathname);
   await app.listen(port);

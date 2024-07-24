@@ -1,10 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
-
-import { ApiHtmlPartialResponse } from './htmx/htmx.utils';
-import { I18nService } from 'nestjs-i18n';
 import { I18nTranslations } from '@generated/i18n';
-import { MainLayout } from './layouts';
+import { Controller, Get } from '@nestjs/common';
+import { I18nService } from 'nestjs-i18n';
+import { ApiHtmlPartialResponse } from './htmx/htmx.utils';
 import { mockT } from './i18n/i18n.utils';
+import { MainLayout } from './layouts';
 
 @Controller()
 export class AppController {

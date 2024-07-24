@@ -1,4 +1,4 @@
-import { Config } from '@core/config';
+import { Config } from '@core/config/app';
 import { Controller } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
