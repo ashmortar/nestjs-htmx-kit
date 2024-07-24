@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 import * as session from 'express-session';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { Config } from './config';
+import type { Config } from './config/app';
 import helmet from 'helmet';
 import * as colors from 'picocolors';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -16,7 +16,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const config = app.get(ConfigService<Config>);
   const { port, debug_routes } = config.getOrThrow('server');
-  app.useGlobalInterceptors(new HtmxInterceptor(config.get('app')?.debugHtmx));
+  app.useGlobalInterceptors(new HtmxInterceptor(config));
   app.use(
     helmet({
       contentSecurityPolicy: {
@@ -37,7 +37,6 @@ async function bootstrap() {
     .setTitle(title)
     .setDescription(description)
     .setVersion(version)
-    .addTag('api')
     .build();
   patchNestjsSwagger();
   const document = SwaggerModule.createDocument(app, swaggerConfig, {});

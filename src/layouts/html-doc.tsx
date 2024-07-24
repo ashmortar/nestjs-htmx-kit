@@ -1,5 +1,5 @@
 export function HtmlDoc(
-  props: Html.PropsWithChildren<{ title?: string; debugHtmx?: boolean }>,
+  props: Html.PropsWithChildren<{ title: string; debugHtmx?: boolean }>,
 ) {
   return (
     <>
@@ -11,12 +11,12 @@ export function HtmlDoc(
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <title>{props.title || 'Hello World!'}</title>
+          <title safe>{props.title}</title>
           <script src="https://cdn.jsdelivr.net/npm/htmx.org/dist/htmx.js"></script>
           <link rel="stylesheet" type="text/css" href="/normalize.css" />
           <link rel="stylesheet" type="text/css" href="/globals.css" />
           <link rel="stylesheet" type="text/css" href="/styles.css" />
-          {props.debugHtmx && (
+          {props.debugHtmx ? (
             <script>{`
 htmx.logger = function(elt, event, data) {
     if(console) {
@@ -24,7 +24,7 @@ htmx.logger = function(elt, event, data) {
     }
 }
           `}</script>
-          )}
+          ) : undefined}
         </head>
         <body>{props.children}</body>
       </html>

@@ -1,0 +1,12 @@
+{
+  "links": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "tou": "Términos de uso"
+  },
+  "app_name": "NestJsx",
+  "welcome": "Bienvenido a NestJsx",
+  "description": "NestJsx es una plantilla de inicio para NestJS con plantillas tsx renderizadas en el servidor y HTMX."
+}

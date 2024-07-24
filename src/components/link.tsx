@@ -1,10 +1,15 @@
+import { ClassName } from './types';
+
 type LinkProps =
-  | {
-      'hx-get': string;
-    }
-  | {
-      href: string;
-    };
+  | ClassName
+  | (
+      | {
+          'hx-get': string;
+        }
+      | {
+          href: string;
+        }
+    );
 
 export function Link({ children, ...rest }: Html.PropsWithChildren<LinkProps>) {
   const props =

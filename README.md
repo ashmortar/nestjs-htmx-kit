@@ -23,3 +23,23 @@ Tracks login attempts to prevent brute force attacks.
 ##### VerificationToken
 
 Used for email verification, password reset, magic link and sms verification.
+
+##### Session
+
+Stores the user's session information.
+
+##### Role
+
+Roles that can be assigned to users.
+
+##### Permission
+
+Permissions that can be assigned to roles.
+
+##### RolePermission
+
+Many to many relationship between roles and permissions.
+
+##### UserRoles
+
+Many to many relationship between users and roles.

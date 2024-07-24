@@ -1,3 +1,4 @@
+import { ApiResponse } from '@nestjs/swagger';
 import { Request } from 'express';
 
 export function isHtmxRequest(request: Request): boolean {
@@ -24,3 +25,21 @@ export function isHtmlDocument(data: any): boolean {
     FULL_HTML_REGEX.test(data)
   );
 }
+
+export const ApiHtmlPartialResponse = (props: {
+  status: number;
+  description: string;
+  jsx: JSX.Element;
+}) =>
+  ApiResponse({
+    status: props.status,
+    description: props.description,
+    content: {
+      'text/html': {
+        schema: {
+          type: 'string',
+          example: props.jsx,
+        },
+      },
+    },
+  });

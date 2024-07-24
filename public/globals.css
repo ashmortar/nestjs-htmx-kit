@@ -22,12 +22,6 @@
   --text-2xl: 1.4rem;
   --text-3xl: 1.75rem;
 
-  /* Breakpoints */
-  --break-sm: 375px; /* Small phone */
-  --break-md: 768px; /* Large phone */
-  --break-tablet: 1024px; /* Tablet */
-  --breakpoint-xl: 1440px; /* Desktop */
-
   /* Spacing (padding and margin) */
   --padding-xxsmall: 0.25rem;
   --padding-xsmall: 0.5rem;
@@ -41,11 +35,13 @@
   --margin-medium: 1.5rem;
   --margin-large: 2rem;
 
-  /* Breakpoints */
-  --breakpoint-sm: 375px;
-  --breakpoint-md: 768px;
+  /* Max Widths */
+  --max-width-sm: 100%;
+  --max-width-md: 720px;
   --breakpoint-lg: 1024px;
+  --max-width-lg: 960px;
   --breakpoint-xl: 1440px;
+  --max-width-xl: 1200px;
 
   /* Border Radius */
   --border-radius-none: 0;
@@ -87,8 +83,6 @@
   --opacity-subtle: 0.8;
   --opacity-medium: 0.5;
   --opacity-high: 0.2;
-
-  --max-width: 1200px;
 }
 
 html {
@@ -101,6 +95,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  -ms-flex-direction: column;
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
@@ -109,8 +104,7 @@ body {
 
 main {
   width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
+  max-width: var(--max-width-sm);
 }
 
 a {
@@ -240,14 +234,14 @@ input[type='reset']:disabled {
   cursor: default;
 }
 
-/* Small Phone Styles */
-@media (max-width: calc(var(--breakpoint-sm) - 1px)) {
+/* xsmall devices */
+@media only screen and (max-width: 600px) {
   body {
     font-size: var(--text-xs);
-    padding: var(--padding-xxsmall);
   }
   main {
     padding: var(--padding-xsmall);
+    max-width: var(--max-width-sm);
   }
   h1 {
     font-size: var(--text-2xl);
@@ -260,14 +254,15 @@ input[type='reset']:disabled {
   }
 }
 
-/* Large Phone Styles */
-@media (min-width: var(--breakpoint-sm)) and (max-width: calc(var(--breakpoint-md) - 1px)) {
+/* small devices */
+@media only screen and (min-width: 600px) {
   body {
     font-size: var(--text-sm);
-    padding: var(--padding-xsmall);
   }
   main {
     padding: var(--padding-small);
+    width: 100%;
+    max-width: var(--max-width-md);
   }
   h1 {
     font-size: var(--text-3xl);
@@ -280,24 +275,29 @@ input[type='reset']:disabled {
   }
 }
 
-/* Tablet Styles */
-@media (min-width: var(--breakpoint-md)) and (max-width: calc(var(--breakpoint-lg) - 1px)) {
+/* medium devices */
+@media only screen and (min-width: 768px) {
   body {
     font-size: var(--text-base);
-    padding: var(--padding-small);
   }
   main {
     padding: var(--padding-medium);
+    width: 100%;
+    max-width: var(--max-width-lg);
   }
 }
 
-/* Desktop Styles */
-@media (min-width: var(--breakpoint-lg)) {
+/* large devices */
+@media only screen and (min-width: 992px) {
   body {
     font-size: var(--text-lg);
-    padding: var(--padding-medium);
   }
   main {
     padding: var(--padding-large);
+    width: 100%;
+    max-width: var(--max-width-xl);
   }
+}
+/* extra large */
+@media only screen and (min-width: 1200px) {
 }

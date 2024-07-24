@@ -1,0 +1,12 @@
+{
+  "links": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "tou": "Terms of Use"
+  },
+  "app_name": "NestJsx",
+  "welcome": "Welcome to NestJsx",
+  "description": "NestJsx is a starter template for NestJS with server rendered tsx templates and HTMX."
+}
