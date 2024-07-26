@@ -2,12 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
-import session from 'express-session';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { Config } from './config/app';
 import helmet from 'helmet';
 import colors from 'picocolors';
+import cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { patchNestjsSwagger } from '@anatine/zod-nestjs';
 import { HtmxInterceptor } from './htmx/htmx.interceptor';
@@ -29,8 +29,7 @@ async function bootstrap() {
       },
     }),
   );
-
-  app.use(session(config.getOrThrow('session')));
+  app.use(cookieParser(config.getOrThrow('cookies').secret));
   app.useGlobalPipes(new ValidationPipe());
   const { title, description, version } = config.getOrThrow('app');
   const swaggerConfig = new DocumentBuilder()

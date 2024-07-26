@@ -1,5 +1,5 @@
 import type { ConfigFactory, ConfigModuleOptions } from '@nestjs/config';
-import { SessionOptions } from 'express-session';
+
 import { z } from 'zod';
 
 const serverSchema = z.object({
@@ -16,18 +16,40 @@ const appSchema = z.object({
   debugHtmx: z.boolean().default(false),
 });
 
-const sessionSchema = z.object({
+const cookiesSchema = z.object({
   secret: z.string(),
-  resave: z.boolean().default(false),
-  saveUninitialized: z.boolean().default(false),
-}) satisfies z.ZodSchema<SessionOptions, any, any>;
+  opts: z.object({
+    httpOnly: z.boolean().default(true),
+    secure: z.boolean().default(false),
+  }),
+});
+
+const jwtSchema = z.object({
+  secret: z.string(),
+});
+
+const oauth2Schema = z.object({
+  clientId: z.string(),
+  clientSecret: z.string(),
+  callbackURL: z.string(),
+});
+
+const authSchema = z.object({
+  google: oauth2Schema
+    .extend({
+      scope: z.array(z.string()).default(['email', 'profile']),
+    })
+    .optional(),
+});
 
 const configSchema = z.object({
   server: serverSchema,
   db: dbSchema,
+  jwt: jwtSchema,
   env: z.string(),
   app: appSchema,
-  session: sessionSchema,
+  cookies: cookiesSchema,
+  auth: authSchema,
 });
 
 export type Config = z.infer<typeof configSchema>;
@@ -43,14 +65,24 @@ const load = [
         url: process.env.DB_URL,
       },
       env: process.env.NODE_ENV,
+      jwt: {
+        secret: process.env.JWT_SECRET,
+      },
       app: {
         title: process.env.APP_TITLE,
         debugHtmx: process.env.DEBUG_HTMX === '1',
       },
-      session: {
+      cookies: {
         secret: process.env.SESSION_SECRET,
-        resave: process.env.RESAVE_SESSION === '1',
-        saveUninitialized: process.env.SAVE_UNINITIALIZED_SESSION === '1',
+        opts: {},
+      },
+      auth: {
+        google: {
+          clientId: process.env.GOOGLE_OAUTH_CLIENT_ID,
+          clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+          callbackURL: process.env.GOOGLE_OAUTH_CALLBACK_URL,
+          scope: process.env.GOOGLE_OAUTH_SCOPE?.split(','),
+        },
       },
     };
     return configSchema.parse(env);

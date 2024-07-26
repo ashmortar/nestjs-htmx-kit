@@ -7,7 +7,7 @@ import {
 import { map, Observable } from 'rxjs';
 
 import { HtmlDoc } from '@core/layouts';
-import { isHtmlFragment } from './htmx.utils';
+import { isHtmlFragment, isHtmxRequest } from './htmx.utils';
 import { ConfigService } from '@nestjs/config';
 import { Config } from '@core/config/app';
 
@@ -21,9 +21,12 @@ export class HtmxInterceptor implements NestInterceptor {
     this.#title = title;
   }
   intercept(_context: ExecutionContext, next: CallHandler): Observable<any> {
+    const request = _context.switchToHttp().getRequest();
+    const isHtmx = isHtmxRequest(request);
+
     return next.handle().pipe(
       map((data) =>
-        isHtmlFragment(data)
+        !isHtmx && isHtmlFragment(data)
           ? HtmlDoc({
               title: this.#title,
               children: data,

@@ -47,20 +47,27 @@ model User {
 
 model Credential {
   /// Unique identifier for the credential.
-  id         String   @id @default(cuid())
+  id            String   @id @default(cuid())
   /// Timestamp of credential creation.
-  created_at DateTime @default(now())
+  created_at    DateTime @default(now())
   /// Timestamp of the last credential update.
-  updated_at DateTime @updatedAt
+  updated_at    DateTime @updatedAt
   /// ID of the user this credential belongs to.
-  user_id    String
-  /// Type of credential (e.g., 'email', 'phone').
-  type       String
-  /// Value of the credential (e.g., email address, phone number).
-  value      String
+  user_id       String
+  /// Type of credential (e.g., 'google', 'password').
+  type          String
+  /// Id from the external provider
+  external_id   String
+  /// Value of the credential (e.g., accessToken, password etc)
+  value         String
+  /// Expiration time of the stored value
+  expires_at    DateTime
+  /// Value of refresh token if exists
+  refresh_token String?
   /// The user this credential is associated with.
-  user       User     @relation(fields: [user_id], references: [id])
+  user          User     @relation(fields: [user_id], references: [id])
 
+  @@unique([type, external_id])
   @@map("credentials")
 }
 
@@ -80,6 +87,7 @@ model Pii {
   /// The user this PII is associated with.
   user       User     @relation(fields: [user_id], references: [id])
 
+  @@unique([type, user_id])
   @@map("pii")
 }
 

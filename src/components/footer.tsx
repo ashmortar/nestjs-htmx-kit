@@ -6,16 +6,24 @@ export function Footer({ t }: Translations) {
     <footer id="footer">
       <ul id="footer-link-list">
         <li id="footer-about-link">
-          <Link hx-get="/about">{t('main.links.about')}</Link>
+          <Link hx-get="/about" hx-target="#main">
+            {t('main.links.about')}
+          </Link>
         </li>
         <li id="footer-contact-link">
-          <Link hx-get="/contact">{t('main.links.contact')}</Link>
+          <Link hx-get="/contact" hx-target="#main">
+            {t('main.links.contact')}
+          </Link>
         </li>
         <li id="footer-terms-link">
-          <Link hx-get="/terms">{t('main.links.tou')}</Link>
+          <Link hx-get="/terms" hx-target="#main">
+            {t('main.links.tou')}
+          </Link>
         </li>
         <li id="footer-privacy-link">
-          <Link hx-get="/privacy">{t('main.links.privacy')}</Link>
+          <Link hx-get="/privacy" hx-target="#main">
+            {t('main.links.privacy')}
+          </Link>
         </li>
       </ul>
     </footer>

@@ -12,7 +12,7 @@ export function Header({ t }: Translations) {
             <h1>{t('main.app_name')}</h1>
           </a>
         </nav>
-        <div id="profile" hx-get="/auth/profile" hx-trigger="load" />
+        <div id="profile" hx-get="/auth/avatar" hx-trigger="load" />
       </header>
     </>
   );

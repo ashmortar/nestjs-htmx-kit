@@ -7,6 +7,7 @@ import opts from './config/app';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { I18nModule } from 'nestjs-i18n';
+import { UsersModule } from './users/users.module';
 import i18n_opts from './config/i18n';
 
 @Module({
@@ -16,6 +17,7 @@ import i18n_opts from './config/i18n';
     PrismaModule.forRoot(),
     I18nModule.forRoot(i18n_opts),
     AuthModule,
+    UsersModule,
   ],
 })
 export class AppModule {}
