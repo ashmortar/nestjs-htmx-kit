@@ -27,11 +27,12 @@ export function isHtmlDocument(data: any): boolean {
   );
 }
 
-export const ApiHtmlPartialResponse = (props: {
+export type HtmlPartialResponseProps = {
   status: number;
   description: string;
-  jsx: JSX.Element;
-}) =>
+  example?: JSX.Element;
+};
+export const ApiHtmlPartialResponse = (props: HtmlPartialResponseProps) =>
   ApiResponse({
     status: props.status,
     description: props.description,
@@ -39,7 +40,7 @@ export const ApiHtmlPartialResponse = (props: {
       'text/html': {
         schema: {
           type: 'string',
-          example: props.jsx,
+          example: props.example,
         },
       },
     },

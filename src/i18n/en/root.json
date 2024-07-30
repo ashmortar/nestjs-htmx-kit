@@ -1,10 +1,13 @@
 {
   "links": {
     "home": "Home",
-    "about": "About",
-    "contact": "Contact",
-    "privacy": "Privacy",
-    "tou": "Terms of Use"
+    "about": "about",
+    "contact": "contact",
+    "privacy": "privacy",
+    "tou": "terms",
+    "sign_in": "Sign In",
+    "register": "Register",
+    "profile": "Profile"
   },
   "app_name": "NestJsx",
   "welcome": "Welcome to NestJsx",

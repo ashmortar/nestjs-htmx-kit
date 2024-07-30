@@ -1,5 +1,11 @@
+import { Link } from '@core/components';
+import { Translations } from '@core/i18n/i18n.utils';
 import { PiiType, SessionWithUserPii } from '@core/users/users.service';
-export function UserAvatar({ user }: { user: SessionWithUserPii['user'] }) {
+
+export type UserAvatarProps = Translations & {
+  user: SessionWithUserPii['user'];
+};
+export function UserAvatar({ user, t }: UserAvatarProps) {
   const imgUrl = user.pii.find(
     (pii) => pii.type === PiiType.profile_photo_url,
   )?.value;
@@ -7,14 +13,16 @@ export function UserAvatar({ user }: { user: SessionWithUserPii['user'] }) {
   const [nameToDisplay, initials] = getName(user);
 
   return (
-    <div>
-      {imgUrl ? (
-        <img src={imgUrl} alt={nameToDisplay} />
-      ) : (
-        <div safe>{initials}</div>
-      )}
-      <div safe>{nameToDisplay}</div>
-    </div>
+    <Link hx-get="/profile" hx-target="#main">
+      <div title={t('root.links.profile')}>
+        {imgUrl ? (
+          <img src={imgUrl} alt={nameToDisplay} />
+        ) : (
+          <div safe>{initials}</div>
+        )}
+        <div safe>{nameToDisplay}</div>
+      </div>
+    </Link>
   );
 }
 

@@ -26,7 +26,7 @@ describe('AppController', () => {
   });
 
   it('should return an html fragment injected with app title', () => {
-    const result = controller.get();
+    const result = controller.main();
     expect(isHtmlFragment(result)).toBe(true);
     expect(isHtmlDocument(result)).toBe(false);
     expect(result).toMatch(/NestJsx/);

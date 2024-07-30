@@ -1,22 +1,21 @@
-import { applyDecorators, Get, Header, RequestMethod } from '@nestjs/common';
+import { applyDecorators, Get, Header } from '@nestjs/common';
+import { ApiHtmlPartialResponse, HtmlPartialResponseProps } from './htmx.utils';
 
-/**
- * Methods decorated with this route will
- * @param route string
- * @returns MethodDecorator
- */
-export function Route(route = '', method = RequestMethod.GET): MethodDecorator {
-  return applyDecorators(Get(route), Header('Hx-Push-Url', route));
-}
-
-function Method(
-  method: RequestMethod,
-): (path: string | string[]) => MethodDecorator {
-  switch (method) {
-    case RequestMethod.GET:
-      return Get;
-
-    default:
-      throw new Error(`${method} not implemented`);
-  }
+export type RouteProps = {
+  route?: string;
+  prefix?: string;
+} & Omit<HtmlPartialResponseProps, 'status'>;
+export function Route({
+  route = '/',
+  prefix = '',
+  ...rest
+}: RouteProps): MethodDecorator {
+  return applyDecorators(
+    ApiHtmlPartialResponse({
+      ...rest,
+      status: 200,
+    }),
+    Get(route),
+    Header('Hx-Push-Url', prefix + route),
+  );
 }

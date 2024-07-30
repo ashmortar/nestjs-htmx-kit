@@ -1,21 +1,24 @@
+import { Translations } from '@core/i18n/i18n.utils';
+import { Header, Footer } from '@core/components';
+
 export function HtmlDoc(
-  props: Html.PropsWithChildren<{ title: string; debugHtmx?: boolean }>,
+  props: Html.PropsWithChildren<{ debugHtmx?: boolean }> & Translations,
 ) {
   return (
     <>
       {'<!doctype html>'}
-      <html lang="en">
+      <html lang="en" class="html">
         <head>
           <meta charset="UTF-8" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <title safe>{props.title}</title>
+          <title>{props.t('meta.title')}</title>
+          <meta name="description" content={props.t('meta.description')} />
           <script src="https://cdn.jsdelivr.net/npm/htmx.org/dist/htmx.js"></script>
           <link rel="stylesheet" type="text/css" href="/normalize.css" />
-          <link rel="stylesheet" type="text/css" href="/globals.css" />
-          <link rel="stylesheet" type="text/css" href="/styles.css" />
+          <link rel="stylesheet" type="text/css" href="/unocss.css" />
           {props.debugHtmx ? (
             <script>{`
 htmx.logger = function(elt, event, data) {
@@ -26,7 +29,11 @@ htmx.logger = function(elt, event, data) {
           `}</script>
           ) : undefined}
         </head>
-        <body>{props.children}</body>
+        <body class="body">
+          <Header t={props.t} />
+          {props.children}
+          <Footer t={props.t} />
+        </body>
       </html>
     </>
   );

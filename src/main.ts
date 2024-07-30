@@ -11,12 +11,15 @@ import cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { patchNestjsSwagger } from '@anatine/zod-nestjs';
 import { HtmxInterceptor } from './htmx/htmx.interceptor';
+import { I18nService } from 'nestjs-i18n';
+import { I18nTranslations } from '@generated/i18n';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const config = app.get(ConfigService<Config>);
   const { port, debug_routes } = config.getOrThrow('server');
-  app.useGlobalInterceptors(new HtmxInterceptor(config));
+  const i18n = app.get(I18nService<I18nTranslations>);
+  app.useGlobalInterceptors(new HtmxInterceptor(config, i18n));
   app.use(
     helmet({
       contentSecurityPolicy: {
@@ -89,14 +92,11 @@ function debugRoutes(app: NestExpressApplication) {
       }
       return acc;
     }, {});
-  console.log(
-    colors.magenta(
-      Object.entries(availableRoutes)
-        .map(
-          ([path, methods]) =>
-            `${path}\n${methods.map((m) => ` - ${m}`).join('\n')}`,
-        )
-        .join('\n'),
-    ),
+
+  console.table(
+    Object.entries(availableRoutes).map(([route, methods]) => ({
+      route,
+      ...Object.fromEntries(methods.map((m) => [m, true])),
+    })),
   );
 }

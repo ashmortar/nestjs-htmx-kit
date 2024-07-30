@@ -1,7 +1,7 @@
 import { ValidGoogleOauthData } from '@core/auth/google-oauth.strategy';
 import { JwtPayload } from '@core/auth/jwt.strategy';
 import { Injectable, Logger } from '@nestjs/common';
-import { Pii, Prisma, PrismaClient, User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { pick } from 'lodash';
 import { PrismaService } from 'nestjs-prisma';
 

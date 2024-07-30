@@ -1,20 +1,29 @@
 import { ClassName } from './types';
 
-type LinkProps =
-  | ClassName
-  | (
-      | {
-          'hx-get': string;
-        }
-      | {
-          href: string;
-        }
-    );
+type LinkProps = ClassName &
+  (
+    | {
+        'hx-get': string;
+      }
+    | {
+        href: string;
+      }
+  );
 
-export function Link({ children, ...rest }: Html.PropsWithChildren<LinkProps>) {
+export function Link({
+  class: className,
+  children,
+  ...rest
+}: Html.PropsWithChildren<LinkProps>) {
   const props =
     `href` in rest
       ? { ...rest, target: '_blank', rel: 'noopener noreferrer' }
       : rest;
-  return <a {...props}>{children}</a>;
+  const ourClass = className ? className : 'link';
+
+  return (
+    <a class={ourClass} {...props}>
+      {children}
+    </a>
+  );
 }
