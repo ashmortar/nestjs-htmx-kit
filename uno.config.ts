@@ -23,13 +23,21 @@ export default defineConfig({
     html: 'h-full bg-light text-dark font-work-sans m-0 p-0',
     body: 'w-full h-full flex flex-col min-w-full m-0 p-0',
     main: 'flex-1 h-full ml-8 mr-8 flex flex-col flex-items-center flex-justify-start',
-    link: 'text-primary hover:underline cursor-pointer',
+    link: 'text-primary hover:underline cursor-pointer font-montserrat',
     'white-link': 'text-light hover:underline cursor-pointer font-montserrat',
     'footer-link-list': 'flex flex-row list-none m-0 p-0 mt-2 mb-2',
     'flex-row-center': 'flex flex-row flex-items-center',
     'flex-row-between': 'flex flex-row flex-justify-between',
     'header-footer': 'flex-row-between bg-dark text-light w-full',
-    card: 'bg-light text-dark p-4 m-4 rounded-lg shadow-lg',
+    card: 'bg-white text-dark p-4 m-4 rounded-lg shadow-lg w-full',
+    'field-error-container': 'm-0 p-0',
+    'field-error': 'text-danger text-xs',
+    'input-container': 'flex flex-col m-0 p-0 pb-2',
+    label: 'm-0 p-0 text-dark uppercase text-xs font-montserrat',
+    input: 'm-0 px-3 h-10 border border-secondary rounded-lg',
+    'btn-primary':
+      'bg-primary text-light p-2 rounded-lg mb-2 w-full uppercase font-montserrat',
+    'form-container': 'flex flex-col m-0 p-0',
   },
   cli: {
     entry: {

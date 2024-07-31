@@ -1303,20 +1303,29 @@
 .i-tabler-brand-x{--un-icon:url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m4 4l11.733 16H20L8.267 4zm0 16l6.768-6.768m2.46-2.46L20 4'/%3E%3C/svg%3E");-webkit-mask:var(--un-icon) no-repeat;mask:var(--un-icon) no-repeat;-webkit-mask-size:100% 100%;mask-size:100% 100%;background-color:currentColor;color:inherit;width:1em;height:1em;}
 /* layer: shortcuts */
 .body{margin:0;width:100%;height:100%;min-width:100%;display:flex;flex-direction:column;padding:0;}
-.card{margin:1rem;border-radius:0.5rem;--un-bg-opacity:1;background-color:rgb(243 244 246 / var(--un-bg-opacity)) /* #f3f4f6 */;padding:1rem;--un-text-opacity:1;color:rgb(31 41 55 / var(--un-text-opacity)) /* #1f2937 */;--un-shadow:var(--un-shadow-inset) 0 10px 15px -3px var(--un-shadow-color, rgb(0 0 0 / 0.1)),var(--un-shadow-inset) 0 4px 6px -4px var(--un-shadow-color, rgb(0 0 0 / 0.1));box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
+.card{margin:1rem;width:100%;border-radius:0.5rem;--un-bg-opacity:1;background-color:rgb(255 255 255 / var(--un-bg-opacity)) /* #fff */;padding:1rem;--un-text-opacity:1;color:rgb(31 41 55 / var(--un-text-opacity)) /* #1f2937 */;--un-shadow:var(--un-shadow-inset) 0 10px 15px -3px var(--un-shadow-color, rgb(0 0 0 / 0.1)),var(--un-shadow-inset) 0 4px 6px -4px var(--un-shadow-color, rgb(0 0 0 / 0.1));box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
+.field-error-container{margin:0;padding:0;}
 .footer-link-list{margin:0;margin-top:0.5rem;margin-bottom:0.5rem;display:flex;flex-direction:row;list-style-type:none;padding:0;}
+.form-container{margin:0;display:flex;flex-direction:column;padding:0;}
 .html{margin:0;height:100%;--un-bg-opacity:1;background-color:rgb(243 244 246 / var(--un-bg-opacity)) /* #f3f4f6 */;padding:0;--un-text-opacity:1;color:rgb(31 41 55 / var(--un-text-opacity)) /* #1f2937 */;font-family:"Work Sans";}
+.input{margin:0;height:2.5rem;border-width:1px;--un-border-opacity:1;border-color:rgb(107 114 128 / var(--un-border-opacity));border-radius:0.5rem;padding-left:0.75rem;padding-right:0.75rem;}
+.input-container{margin:0;display:flex;flex-direction:column;padding:0;padding-bottom:0.5rem;}
+.label{margin:0;padding:0;font-size:0.75rem;line-height:1rem;--un-text-opacity:1;color:rgb(31 41 55 / var(--un-text-opacity)) /* #1f2937 */;font-family:"Montserrat";text-transform:uppercase;}
+.btn-primary{margin-bottom:0.5rem;width:100%;border-radius:0.5rem;--un-bg-opacity:1;background-color:rgb(59 130 246 / var(--un-bg-opacity)) /* #3b82f6 */;padding:0.5rem;--un-text-opacity:1;color:rgb(243 244 246 / var(--un-text-opacity)) /* #f3f4f6 */;font-family:"Montserrat";text-transform:uppercase;}
 .main{margin-left:2rem;margin-right:2rem;height:100%;display:flex;flex:1 1 0%;flex-direction:column;justify-content:flex-start;align-items:center;}
 .header-footer{width:100%;display:flex;flex-direction:row;justify-content:space-between;--un-bg-opacity:1;background-color:rgb(31 41 55 / var(--un-bg-opacity)) /* #1f2937 */;--un-text-opacity:1;color:rgb(243 244 246 / var(--un-text-opacity)) /* #f3f4f6 */;}
 .flex-row-between{display:flex;flex-direction:row;justify-content:space-between;}
 .flex-row-center{display:flex;flex-direction:row;align-items:center;}
-.link{cursor:pointer;--un-text-opacity:1;color:rgb(59 130 246 / var(--un-text-opacity)) /* #3b82f6 */;}
+.link{cursor:pointer;--un-text-opacity:1;color:rgb(59 130 246 / var(--un-text-opacity)) /* #3b82f6 */;font-family:"Montserrat";}
 .white-link{cursor:pointer;--un-text-opacity:1;color:rgb(243 244 246 / var(--un-text-opacity)) /* #f3f4f6 */;font-family:"Montserrat";}
+.field-error{font-size:0.75rem;line-height:1rem;--un-text-opacity:1;color:rgb(239 68 68 / var(--un-text-opacity)) /* #ef4444 */;}
 .link:hover{text-decoration-line:underline;}
 .white-link:hover{text-decoration-line:underline;}
 /* layer: default */
+.invisible{visibility:hidden;}
 .m-0{margin:0;}
 .m8{margin:2rem;}
+.mb-2{margin-bottom:0.5rem;}
 .ml-2{margin-left:0.5rem;}
 .ml-8{margin-left:2rem;}
 .mr-1{margin-right:0.25rem;}
