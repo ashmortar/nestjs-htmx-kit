@@ -27,6 +27,7 @@ import { Route } from '@core/htmx/htmx.decorator';
 import * as P from '@core/auth/pages';
 import { ApiHeader, ApiResponse } from '@nestjs/swagger';
 import { SignInDto } from './schemas/sign-in';
+import { EmailDto } from '@core/validation/schemas';
 const PREFIX = 'auth' as const;
 const prefix = `/${PREFIX}/` as const;
 
@@ -124,6 +125,23 @@ export class AuthController extends Base {
     return <P.Register t={this.t} />;
   }
 
+  @ApiResponse({
+    status: 201,
+    description: 'register',
+  })
+  @ApiHeader({
+    name: 'HX-Request',
+    required: true,
+    allowEmptyValue: false,
+    schema: {
+      default: 'true',
+    },
+  })
+  @Post('register')
+  async registerPost(@Body() signInDto: SignInDto) {
+    console.log(signInDto);
+  }
+
   @Route({
     route: 'forgot-password',
     prefix,
@@ -136,5 +154,22 @@ export class AuthController extends Base {
   })
   forgotPassword() {
     return <P.ForgotPassword t={this.t} />;
+  }
+
+  @ApiResponse({
+    status: 201,
+    description: 'forgot password',
+  })
+  @ApiHeader({
+    name: 'HX-Request',
+    required: true,
+    allowEmptyValue: false,
+    schema: {
+      default: 'true',
+    },
+  })
+  @Post('forgot-password')
+  async forgotPasswordPost(@Body() emailDto: EmailDto) {
+    console.log(emailDto);
   }
 }
