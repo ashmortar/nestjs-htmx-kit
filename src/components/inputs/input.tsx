@@ -1,4 +1,5 @@
-import { ClassName } from './types';
+import { ClassName } from '../types';
+import { NoValidationError } from './no-validation-error';
 
 export type InputProps = ClassName & {
   type: JSX.HtmlInputTag['type'];
@@ -11,12 +12,24 @@ export type InputProps = ClassName & {
     | { title: string; placeholder?: string; label?: string }
   );
 
+export type TypedInputProps = Pick<
+  InputProps,
+  'title' | 'label' | 'placeholder'
+> & {
+  value?: string;
+};
+
 export function Input(props: InputProps) {
-  const errorId = `${props.name}-error`;
   return (
-    <div class={props.class}>
-      {props.label ?? <label for={props.name}>{props.label}</label>}
+    <div class={props.class ?? 'input-container'}>
+      {props.label ? (
+        <label class="label" for={props.name} safe>
+          {props.label}
+        </label>
+      ) : null}
       <input
+        class="input"
+        hx-post={`/validation/${props.name}`}
         type={props.type}
         name={props.name}
         required={props.required}
@@ -24,7 +37,7 @@ export function Input(props: InputProps) {
         placeholder={props.placeholder}
         title={props.title}
       />
-      <div id={errorId} />
+      <NoValidationError name={props.name} />
     </div>
   );
 }

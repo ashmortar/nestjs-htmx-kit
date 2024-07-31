@@ -8,11 +8,17 @@ import type { Config } from './config/app';
 import helmet from 'helmet';
 import colors from 'picocolors';
 import cookieParser from 'cookie-parser';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import {
+  DocumentBuilder,
+  SwaggerCustomOptions,
+  SwaggerModule,
+} from '@nestjs/swagger';
 import { patchNestjsSwagger } from '@anatine/zod-nestjs';
 import { HtmxInterceptor } from './htmx/htmx.interceptor';
 import { I18nService } from 'nestjs-i18n';
 import { I18nTranslations } from '@generated/i18n';
+import { ZodFilter } from './zod/zod.filter';
+import { ZodValidationPipe } from './zod/zod.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -33,7 +39,9 @@ async function bootstrap() {
     }),
   );
   app.use(cookieParser(config.getOrThrow('cookies').secret));
+  app.useGlobalPipes(new ZodValidationPipe());
   app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalFilters(new ZodFilter());
   const { title, description, version } = config.getOrThrow('app');
   const swaggerConfig = new DocumentBuilder()
     .setTitle(title)
@@ -42,7 +50,10 @@ async function bootstrap() {
     .build();
   patchNestjsSwagger();
   const document = SwaggerModule.createDocument(app, swaggerConfig, {});
-  SwaggerModule.setup('/api', app, document);
+  const opts: SwaggerCustomOptions = {
+    swaggerOptions: {},
+  };
+  SwaggerModule.setup('/api', app, document, opts);
   const pathname = join(__dirname, '..', 'public');
 
   app.useStaticAssets(pathname);
@@ -96,7 +107,7 @@ function debugRoutes(app: NestExpressApplication) {
   console.table(
     Object.entries(availableRoutes).map(([route, methods]) => ({
       route,
-      ...Object.fromEntries(methods.map((m) => [m, true])),
+      ...Object.fromEntries(methods.map((m) => [m, '✔'])),
     })),
   );
 }

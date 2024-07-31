@@ -1,3 +1,4 @@
+import { ValidationError } from '@core/components';
 import {
   ArgumentsHost,
   Catch,
@@ -13,7 +14,7 @@ export class ZodFilter<T extends ZodError> implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     response
-      .status(HttpStatus.BAD_REQUEST)
+      .status(HttpStatus.OK)
       // send an array of error messages
       // id's are the path of the error
       // htmx can then oob-swap them into
@@ -26,11 +27,7 @@ function Errors({ zodError }: { zodError: ZodError }) {
   return (
     <>
       {zodError.errors.map((issue) => (
-        <div id={issue.path?.toString?.()}>
-          <p class="error">
-            <small safe>{issue.message}</small>
-          </p>
-        </div>
+        <ValidationError issue={issue} />
       ))}
     </>
   );

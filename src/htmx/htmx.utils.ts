@@ -1,4 +1,5 @@
-import { ApiResponse } from '@nestjs/swagger';
+import { applyDecorators } from '@nestjs/common';
+import { ApiHeader, ApiResponse, ApiResponseMetadata } from '@nestjs/swagger';
 import { Request } from 'express';
 
 export function isHtmxRequest(request: Request): boolean {
@@ -33,15 +34,25 @@ export type HtmlPartialResponseProps = {
   example?: JSX.Element;
 };
 export const ApiHtmlPartialResponse = (props: HtmlPartialResponseProps) =>
-  ApiResponse({
-    status: props.status,
-    description: props.description,
-    content: {
-      'text/html': {
-        schema: {
-          type: 'string',
-          example: props.example,
+  applyDecorators(
+    ApiResponse({
+      status: props.status,
+      description: props.description,
+      content: {
+        'text/html': {
+          schema: {
+            type: 'string',
+            example: props.example,
+          },
         },
       },
-    },
-  });
+    }),
+    ApiHeader({
+      name: 'HX-Request',
+      required: true,
+      allowEmptyValue: false,
+      schema: {
+        default: 'true',
+      },
+    }),
+  );

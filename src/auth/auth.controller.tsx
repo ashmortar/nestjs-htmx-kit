@@ -1,5 +1,14 @@
 import { ApiHtmlPartialResponse } from '@core/htmx/htmx.utils';
-import { Controller, Get, Query, Req, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { GoogleOauthGuard } from './google-oauth.guard';
 import { Request, Response } from 'express';
 import { ValidGoogleOauthData } from './google-oauth.strategy';
@@ -16,6 +25,8 @@ import { I18nService } from 'nestjs-i18n';
 import { I18nTranslations } from '@generated/i18n';
 import { Route } from '@core/htmx/htmx.decorator';
 import * as P from '@core/auth/pages';
+import { ApiHeader, ApiResponse } from '@nestjs/swagger';
+import { SignInDto } from './schemas/sign-in';
 const PREFIX = 'auth' as const;
 const prefix = `/${PREFIX}/` as const;
 
@@ -78,8 +89,25 @@ export class AuthController extends Base {
       </main>
     ),
   })
-  signIn() {
+  signInPage() {
     return <P.SignIn t={this.t} />;
+  }
+
+  @ApiResponse({
+    status: 201,
+    description: 'sign in',
+  })
+  @ApiHeader({
+    name: 'HX-Request',
+    required: true,
+    allowEmptyValue: false,
+    schema: {
+      default: 'true',
+    },
+  })
+  @Post('sign-in')
+  async signIn(@Body() signInDto: SignInDto) {
+    console.log(signInDto);
   }
 
   @Route({
