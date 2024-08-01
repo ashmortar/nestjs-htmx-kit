@@ -1,5 +1,5 @@
 import { applyDecorators } from '@nestjs/common';
-import { ApiHeader, ApiResponse, ApiResponseMetadata } from '@nestjs/swagger';
+import { ApiHeader, ApiResponse } from '@nestjs/swagger';
 import { Request } from 'express';
 
 export function isHtmxRequest(request: Request): boolean {
@@ -27,32 +27,3 @@ export function isHtmlDocument(data: any): boolean {
     FULL_HTML_REGEX.test(data)
   );
 }
-
-export type HtmlPartialResponseProps = {
-  status: number;
-  description: string;
-  example?: JSX.Element;
-};
-export const ApiHtmlPartialResponse = (props: HtmlPartialResponseProps) =>
-  applyDecorators(
-    ApiResponse({
-      status: props.status,
-      description: props.description,
-      content: {
-        'text/html': {
-          schema: {
-            type: 'string',
-            example: props.example,
-          },
-        },
-      },
-    }),
-    ApiHeader({
-      name: 'HX-Request',
-      required: true,
-      allowEmptyValue: false,
-      schema: {
-        default: 'true',
-      },
-    }),
-  );

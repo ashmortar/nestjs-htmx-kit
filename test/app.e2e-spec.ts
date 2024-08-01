@@ -18,7 +18,7 @@ describe('AppController (e2e)', () => {
   it('/ (GET)', () => {
     return request(app.getHttpServer())
       .get('/')
-      .expect(302)
-      .expect(/Found. Redirecting to \/teachers/);
+      .expect(200)
+      .expect(/NestJsx/);
   });
 });
