@@ -9,6 +9,5 @@
     "npm:unpublishSafe"
   ],
   "prConcurrentLimit": 1,
-  "baseBranches": ["develop"],
   "labels": ["dependencies"]
 }
