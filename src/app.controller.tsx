@@ -16,7 +16,7 @@ export class AppController extends Base {
     description: 'Main HTML document landing page',
     example: <P.Index t={mockT} />,
   })
-  main() {
+  index() {
     return <P.Index t={this.t} />;
   }
 

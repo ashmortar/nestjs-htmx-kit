@@ -55,7 +55,7 @@ export class AuthController extends Base {
       </main>
     ),
   })
-  signInPage() {
+  signIn() {
     return <P.SignIn t={this.t} />;
   }
 
@@ -64,7 +64,7 @@ export class AuthController extends Base {
     status: 201,
     description: 'sign in',
   })
-  async signIn(@Body() signInDto: SignInDto) {
+  async sigInPost(@Body() signInDto: SignInDto) {
     console.log(signInDto);
   }
 

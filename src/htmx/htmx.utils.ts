@@ -1,5 +1,3 @@
-import { applyDecorators } from '@nestjs/common';
-import { ApiHeader, ApiResponse } from '@nestjs/swagger';
 import { Request } from 'express';
 
 export function isHtmxRequest(request: Request): boolean {
