@@ -1,6 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ]
+    ":dependencyDashboard",
+    "config:recommended",
+    "group:monorepos",
+    "group:recommended",
+    ":pinAllExceptPeerDependencies",
+    "npm:unpublishSafe"
+  ],
+  "prConcurrentLimit": 1,
+  "baseBranches": ["develop"],
+  "labels": ["dependencies"]
 }
