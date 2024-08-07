@@ -7,10 +7,11 @@ import { I18nModule } from 'nestjs-i18n';
 import i18n_opts from './config/i18n';
 
 describe('AppController', () => {
+  let module: TestingModule;
   let controller: AppController;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    module = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({ ...opts, envFilePath: '.env.test' }),
         I18nModule.forRoot(i18n_opts),
@@ -21,12 +22,16 @@ describe('AppController', () => {
     controller = module.get<AppController>(AppController);
   });
 
+  afterEach(async () => {
+    await module.close();
+  });
+
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
 
   it('should return an html fragment injected with app title', () => {
-    const result = controller.main();
+    const result = controller.index();
     expect(isHtmlFragment(result)).toBe(true);
     expect(isHtmlDocument(result)).toBe(false);
     expect(result).toMatch(/NestJsx/);

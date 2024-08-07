@@ -5,10 +5,11 @@ import { PrismaService } from 'nestjs-prisma';
 import { prismaMock } from '../../prisma/singleton';
 
 describe('UsersController', () => {
+  let module: TestingModule;
   let controller: UsersController;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    module = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [
         UsersService,
@@ -20,6 +21,10 @@ describe('UsersController', () => {
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
+  });
+  afterEach(async () => {
+    await module.close();
+    return;
   });
 
   it('should be defined', () => {

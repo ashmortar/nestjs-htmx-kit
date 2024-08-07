@@ -12,4 +12,10 @@ beforeEach(() => {
   mockReset(prismaMock);
 });
 
+afterAll(async () => {
+  await prisma.$disconnect();
+  jest.restoreAllMocks();
+  return;
+});
+
 export const prismaMock = prisma as unknown as DeepMockProxy<PrismaClient>;

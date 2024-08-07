@@ -6,10 +6,11 @@ import { PrismaService } from 'nestjs-prisma';
 import { prismaMock } from '../../prisma/singleton';
 
 describe('AuthService', () => {
+  let module: TestingModule;
   let service: AuthService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    module = await Test.createTestingModule({
       imports: [JwtModule],
       providers: [
         AuthService,
@@ -19,6 +20,10 @@ describe('AuthService', () => {
     }).compile();
 
     service = module.get<AuthService>(AuthService);
+  });
+  afterEach(async () => {
+    await module.close();
+    return;
   });
 
   it('should be defined', () => {
