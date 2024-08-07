@@ -32,8 +32,10 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
+      - name: env
+        run: cp .env.example.test .env.test
       - name: Test
-        run: npm run test
+        run: npm run test:cov
 
   build:
     runs-on: ubuntu-latest
