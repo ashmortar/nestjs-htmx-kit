@@ -13,9 +13,9 @@
     "start:debug": "uno css && nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "xss-scan && jest --detectOpenHandles",
+    "test": "xss-scan && jest --verbose",
     "test:watch": "xss-scan && jest --watch",
-    "test:cov": "xss-scan && jest --coverage",
+    "test:cov": "xss-scan && jest --verbose --coverage",
     "test:debug": "xss-scan && node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "xss-scan && jest --config ./test/jest-e2e.json",
     "migrate:dev": "npx prisma migrate dev",
@@ -109,6 +109,10 @@
       "ts",
       "jsx",
       "tsx"
+    ],
+    "coveragePathIgnorePatterns": [
+      "\\.module\\.ts",
+      "main.ts"
     ],
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",

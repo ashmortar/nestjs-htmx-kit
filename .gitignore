@@ -12,8 +12,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# Generated files
-/generated
 
 # OS
 .DS_Store

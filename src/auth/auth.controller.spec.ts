@@ -11,10 +11,11 @@ import i18n_opts from '@core/config/i18n';
 import opts from '@core/config/app';
 
 describe('AuthController', () => {
+  let module: TestingModule;
   let controller: AuthController;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    module = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({
           ...opts,
@@ -32,6 +33,10 @@ describe('AuthController', () => {
     }).compile();
 
     controller = module.get<AuthController>(AuthController);
+  });
+  afterEach(async () => {
+    await module.close();
+    return;
   });
 
   it('should be defined', () => {

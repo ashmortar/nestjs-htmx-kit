@@ -20,14 +20,18 @@ export const PiiType: Record<PiiType, PiiType> = PII_TYPES.reduce(
   {} as Record<PiiType, PiiType>,
 );
 
-const SessionWithUserWithPiiInclude = {
+export const UserAndPiiInclude = {
   include: {
     user: { include: { pii: true } },
   },
 } satisfies Prisma.SessionDefaultArgs;
 
 export type SessionWithUserPii = Prisma.SessionGetPayload<
-  typeof SessionWithUserWithPiiInclude
+  typeof UserAndPiiInclude
+>;
+
+export type CredentialWithUserPii = Prisma.CredentialGetPayload<
+  typeof UserAndPiiInclude
 >;
 
 @Injectable()
@@ -35,6 +39,11 @@ export class UsersService {
   #log = new Logger(UsersService.name);
   constructor(private readonly db: PrismaService) {}
 
+  /**
+   * Finds an existing user by external_id or email
+   * @param {ValidGoogleOauthData} data - The data to search for
+   * @returns {Promise<User | null>} The user if found, otherwise null
+   */
   async findExistingUser(data: ValidGoogleOauthData): Promise<User | null> {
     const OR: Prisma.UserWhereInput['OR'] = [
       {
@@ -57,14 +66,25 @@ export class UsersService {
     });
   }
 
-  async getUserByJwt({ sub: id }: JwtPayload) {
+  /**
+   * Get a user by their JWT payload
+   * @param {JwtPayload} jwt - The JWT payload
+   * @returns {Promise<SessionWithUserPii>} The user session with associated User and PII
+   */
+  async getUserByJwt(jwt: JwtPayload) {
+    const { sub: id } = jwt;
     const session = await this.db.session.findUnique({
       where: { id },
-      ...SessionWithUserWithPiiInclude,
+      ...UserAndPiiInclude,
     });
     return session;
   }
 
+  /**
+   * Create a new user with the given data
+   * @param {ValidGoogleOauthData} data - The data to create the user with
+   * @returns {Promise<CredentialWithUserPii>} The user session with associated User and PII
+   */
   async createCredentialedUser(data: ValidGoogleOauthData) {
     const { credential, pii } = data;
     return this.db.credential.create({
@@ -78,10 +98,16 @@ export class UsersService {
           },
         },
       },
-      ...SessionWithUserWithPiiInclude,
+      ...UserAndPiiInclude,
     });
   }
 
+  /**
+   * Update a user with the given data
+   * @param {User} user - The user to update
+   * @param {ValidGoogleOauthData} data - The data to update the user with
+   * @returns {Promise<CredentialWithUserPii>} The user session with associated User and PII
+   */
   async updateCredentialedUser(user: User, data: ValidGoogleOauthData) {
     const { credential, pii } = data;
     await this.db.$transaction(
@@ -111,10 +137,15 @@ export class UsersService {
         },
       },
       update: credential,
-      ...SessionWithUserWithPiiInclude,
+      ...UserAndPiiInclude,
     });
   }
 
+  /**
+   * Upsert a user with the given data
+   * @param {ValidGoogleOauthData} data - The data to upsert the user with
+   * @returns {Promise<CredentialWithUserPii>} The user session with associated User and PII
+   */
   async upsertOauthCredentialUser(
     data: ValidGoogleOauthData,
   ): Promise<SessionWithUserPii> {
