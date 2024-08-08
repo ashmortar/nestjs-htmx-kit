@@ -8,7 +8,7 @@ import { I18nTranslations } from '@generated/i18n';
 
 describe('HtmxInterceptor', () => {
   let app: TestingModule;
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({
@@ -19,10 +19,11 @@ describe('HtmxInterceptor', () => {
       ],
     }).compile();
   });
-  afterEach(async () => {
+
+  afterAll(async () => {
     await app.close();
-    return;
   });
+
   it('should be defined', () => {
     const config = app.get<ConfigService<Config>>(ConfigService);
     const i18n = app.get<I18nService<I18nTranslations>>(I18nService);

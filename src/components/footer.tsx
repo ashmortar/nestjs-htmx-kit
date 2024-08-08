@@ -1,85 +1,78 @@
 import { Translations } from '@core/i18n/i18n.utils';
+
 import { Link } from './link';
 import { AppIcon } from './app-icon';
 
 export function Footer({ t }: Translations) {
+  const year = new Date().getFullYear();
   return (
-    <footer id="footer" class="header-footer">
-      <div id="footer-content" class="flex-row-center ml-8">
-        <div id="social-links" class="flex-row-center">
-          <ul class="footer-link-list">
-            <li class="mr-1">
+    <footer class="bg-white dark:bg-gray-800 px-4 lg:px-4 py-2.5 justify-self-end">
+      <div class="w-full max-w-screen-xl mx-auto">
+        <div class="sm:flex sm:items-center sm:justify-between">
+          <Link
+            href="https://github.com/ashmortar/nestjs-core#readme"
+            class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
+          >
+            <AppIcon style="fill: white;" />
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              {t('root.app_name')}
+            </span>
+          </Link>
+          <ul class="flex flex-wrap items-center mb-4 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+            <li>
               <Link
-                class="white-link"
-                hx-get="/"
+                hx-get="/about"
                 hx-target="#main"
                 hx-swap="outerHTML"
+                class="hover:underline me-4 md:me-6"
               >
-                <AppIcon height="16" width="16" class="mr-1" />
-              </Link>
-            </li>
-            <li class="mr-1">
-              <Link class="white-link" href="https://twitter.com">
-                <div class="i-tabler-brand-x" title="X.com" />
-              </Link>
-            </li>
-            <li class="mr-1">
-              <Link class="white-link" href="https://facebook.com">
-                <div class="i-tabler-brand-facebook" title="Facebook" />
+                {t('root.links.about')}
               </Link>
             </li>
             <li>
-              <Link class="white-link" href="https://instagram.com">
-                <div class="i-tabler-brand-instagram" title="Instagram" />
+              <Link
+                hx-get="/privacy"
+                hx-target="#main"
+                hx-swap="outerHTML"
+                class="hover:underline me-4 md:me-6"
+              >
+                {t('root.links.privacy')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                hx-get="/terms"
+                hx-target="#main"
+                hx-swap="outerHTML"
+                class="hover:underline me-4 md:me-6"
+              >
+                {t('root.links.tou')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                hx-get="/contact"
+                hx-target="#main"
+                hx-swap="outerHTML"
+                class="hover:underline"
+              >
+                {t('root.links.contact')}
               </Link>
             </li>
           </ul>
         </div>
+        <hr class="my-4 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-6" />
+        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          © {year}{' '}
+          <Link
+            href={t('root.company_url')}
+            class="hover:underline text-blue-500"
+          >
+            {t('root.company_name')}
+          </Link>
+          . {t('root.rights')}
+        </span>
       </div>
-      <nav id="footer-links" class="flex-row-center mr-8">
-        <ul class="footer-link-list">
-          <li class="mr-4">
-            <Link
-              class="white-link text-xs"
-              hx-get="/about"
-              hx-target="#main"
-              hx-swap="outerHTML"
-            >
-              {t('root.links.about')}
-            </Link>
-          </li>
-          <li class="mr-4">
-            <Link
-              class="white-link text-xs"
-              hx-get="/contact"
-              hx-target="#main"
-              hx-swap="outerHTML"
-            >
-              {t('root.links.contact')}
-            </Link>
-          </li>
-          <li class="mr-4">
-            <Link
-              class="white-link text-xs"
-              hx-get="/terms"
-              hx-target="#main"
-              hx-swap="outerHTML"
-            >
-              {t('root.links.tou')}
-            </Link>
-          </li>
-          <li>
-            <Link
-              class="white-link text-xs"
-              hx-get="/privacy"
-              hx-target="#main"
-              hx-swap="outerHTML"
-            >
-              {t('root.links.privacy')}
-            </Link>
-          </li>
-        </ul>
-      </nav>
     </footer>
   );
 }

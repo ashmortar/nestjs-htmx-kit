@@ -9,7 +9,7 @@ describe('AuthService', () => {
   let module: TestingModule;
   let service: AuthService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     module = await Test.createTestingModule({
       imports: [JwtModule],
       providers: [
@@ -21,9 +21,9 @@ describe('AuthService', () => {
 
     service = module.get<AuthService>(AuthService);
   });
-  afterEach(async () => {
+
+  afterAll(async () => {
     await module.close();
-    return;
   });
 
   it('should be defined', () => {

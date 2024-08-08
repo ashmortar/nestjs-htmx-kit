@@ -7,9 +7,25 @@
     "tou": "terms",
     "sign_in": "Sign In",
     "register": "Register",
-    "profile": "Profile"
+    "profile": "Profile",
+    "twitter": "Twitter",
+    "github": "GitHub",
+    "facebook": "Facebook",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram"
+  },
+  "nav": {
+    "sr-button": "Open main menu",
+    "home": "Home",
+    "sign-in": "Sign In",
+    "register": "Register",
+    "profile": "Profile",
+    "contact": "Contact"
   },
   "app_name": "NestJsx",
+  "company_name": "@ashmortar",
+  "company_url": "https://github.com/ashmortar",
+  "rights": "All rights reserved.",
   "welcome": "Welcome to NestJsx",
   "description": "NestJsx is a starter template for NestJS with server rendered tsx templates and HTMX."
 }

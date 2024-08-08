@@ -12,7 +12,6 @@ import { ConfigService } from '@nestjs/config';
 import { Config } from '@core/config/app';
 import { I18nService } from 'nestjs-i18n';
 import { I18nTranslations } from '@generated/i18n';
-
 @Injectable()
 export class HtmxInterceptor implements NestInterceptor {
   #debugHtmx: boolean;
@@ -26,7 +25,6 @@ export class HtmxInterceptor implements NestInterceptor {
   intercept(_context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = _context.switchToHttp().getRequest();
     const isHtmx = isHtmxRequest(request);
-
     return next.handle().pipe(
       map((data) =>
         !isHtmx && isHtmlFragment(data)
@@ -34,6 +32,7 @@ export class HtmxInterceptor implements NestInterceptor {
               children: data,
               debugHtmx: this.#debugHtmx,
               t: this.i18n.t.bind(this.i18n),
+              session: request.user,
             })
           : data,
       ),

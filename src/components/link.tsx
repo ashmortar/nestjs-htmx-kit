@@ -1,9 +1,11 @@
 import { ClassName } from './types';
 
-type LinkProps = ClassName &
+export type LinkProps = ClassName &
   (
     | {
         'hx-get': string;
+        'hx-target'?: string;
+        'hx-swap'?: string;
       }
     | {
         href: string;

@@ -1,5 +1,16 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": ["resave"]
+  "cSpell.words": [
+    "anatine",
+    "flowbite",
+    "htmx",
+    "kitajs",
+    "opentelemetry",
+    "picocolors",
+    "pino",
+    "resave",
+    "signup",
+    "tailwindcss"
+  ]
 }

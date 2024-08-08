@@ -1,10 +1,11 @@
+import { Heading1, MainContent, Paragraph } from '@core/components';
 import { Translations } from '@core/i18n/i18n.utils';
 
 export function Privacy({ t }: Translations) {
   return (
-    <main class="main" id="main">
-      <h1>{t('privacy.title')}</h1>
-      <p>{t('privacy.description')}</p>
-    </main>
+    <MainContent>
+      <Heading1>{t('privacy.title')}</Heading1>
+      <Paragraph>{t('privacy.description')}</Paragraph>
+    </MainContent>
   );
 }

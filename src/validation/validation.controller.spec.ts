@@ -5,16 +5,16 @@ describe('ValidationController', () => {
   let module: TestingModule;
   let controller: ValidationController;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     module = await Test.createTestingModule({
       controllers: [ValidationController],
     }).compile();
 
     controller = module.get<ValidationController>(ValidationController);
   });
-  afterEach(async () => {
+
+  afterAll(async () => {
     await module.close();
-    return;
   });
 
   it('should be defined', () => {

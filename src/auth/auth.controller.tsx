@@ -16,8 +16,9 @@ import * as P from '@core/auth/pages';
 
 import { SignInDto } from './schemas/sign-in';
 import { EmailDto } from '@core/validation/schemas';
+import { MainContent } from '@core/components';
 const PREFIX = 'auth' as const;
-const prefix = `/${PREFIX}/` as const;
+const prefix = `/${PREFIX}` as const;
 
 @Controller(PREFIX)
 export class AuthController extends Base {
@@ -29,30 +30,30 @@ export class AuthController extends Base {
     super(i18n);
   }
   @Partial({
-    route: 'avatar',
+    route: '/avatar',
     status: 200,
-    description: 'user avatar or login/signup links',
+    description: 'user avatar or login/sign up links',
     example: (
       <nav>
         <a href="signup">sign up</a>
       </nav>
     ),
   })
-  async avatar(@CurrentSession() sess: SessionWithUserPii | undefined) {
-    if (sess) {
-      return <UserAvatar user={sess.user} t={this.t} />;
+  async avatar(@CurrentSession() session: SessionWithUserPii | undefined) {
+    if (session) {
+      return <UserAvatar session={session} t={this.t} />;
     }
     return <AuthLinks t={this.t} />;
   }
 
   @Route({
-    route: 'sign-in',
+    route: '/sign-in',
     prefix,
     description: 'sign in form or user avatar',
     example: (
-      <main>
+      <MainContent>
         <form>...</form>
-      </main>
+      </MainContent>
     ),
   })
   signIn() {
@@ -60,7 +61,7 @@ export class AuthController extends Base {
   }
 
   @Form({
-    route: 'sign-in',
+    route: '/sign-in',
     status: 201,
     description: 'sign in',
   })
@@ -69,13 +70,13 @@ export class AuthController extends Base {
   }
 
   @Route({
-    route: 'register',
+    route: '/register',
     prefix,
     description: 'register form',
     example: (
-      <main>
+      <MainContent>
         <form>...</form>
-      </main>
+      </MainContent>
     ),
   })
   register() {
@@ -83,7 +84,7 @@ export class AuthController extends Base {
   }
 
   @Form({
-    route: 'register',
+    route: '/register',
     status: 201,
     description: 'register',
   })
@@ -92,13 +93,13 @@ export class AuthController extends Base {
   }
 
   @Route({
-    route: 'forgot-password',
+    route: '/forgot-password',
     prefix,
     description: 'forgot password form',
     example: (
-      <main>
+      <MainContent>
         <form>...</form>
-      </main>
+      </MainContent>
     ),
   })
   forgotPassword() {
@@ -106,7 +107,7 @@ export class AuthController extends Base {
   }
 
   @Form({
-    route: 'forgot-password',
+    route: '/forgot-password',
     status: 201,
     description: 'forgot  password',
   })

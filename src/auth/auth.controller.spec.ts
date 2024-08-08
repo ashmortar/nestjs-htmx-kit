@@ -14,7 +14,7 @@ describe('AuthController', () => {
   let module: TestingModule;
   let controller: AuthController;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     module = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({
@@ -34,9 +34,8 @@ describe('AuthController', () => {
 
     controller = module.get<AuthController>(AuthController);
   });
-  afterEach(async () => {
+  afterAll(async () => {
     await module.close();
-    return;
   });
 
   it('should be defined', () => {

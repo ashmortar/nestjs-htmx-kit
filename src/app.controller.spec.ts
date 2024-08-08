@@ -10,7 +10,7 @@ describe('AppController', () => {
   let module: TestingModule;
   let controller: AppController;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     module = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({ ...opts, envFilePath: '.env.test' }),
@@ -22,7 +22,7 @@ describe('AppController', () => {
     controller = module.get<AppController>(AppController);
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await module.close();
   });
 

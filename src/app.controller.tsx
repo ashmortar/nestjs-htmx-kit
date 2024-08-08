@@ -21,7 +21,7 @@ export class AppController extends Base {
   }
 
   @Route({
-    route: 'about',
+    route: '/about',
     description: 'About page',
     example: <P.About t={mockT} />,
   })
@@ -30,7 +30,7 @@ export class AppController extends Base {
   }
 
   @Route({
-    route: 'contact',
+    route: '/contact',
     description: 'Contact page',
     example: <P.Contact t={mockT} />,
   })
@@ -39,7 +39,7 @@ export class AppController extends Base {
   }
 
   @Route({
-    route: 'privacy',
+    route: '/privacy',
     description: 'Privacy page',
     example: <P.Privacy t={mockT} />,
   })
@@ -48,7 +48,7 @@ export class AppController extends Base {
   }
 
   @Route({
-    route: 'terms',
+    route: '/terms',
     description: 'Terms page',
     example: <P.Tou t={mockT} />,
   })

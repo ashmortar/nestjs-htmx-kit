@@ -61,8 +61,24 @@ export type I18nTranslations = {
             "sign_in": string;
             "register": string;
             "profile": string;
+            "twitter": string;
+            "github": string;
+            "facebook": string;
+            "linkedin": string;
+            "instagram": string;
+        };
+        "nav": {
+            "sr-button": string;
+            "home": string;
+            "sign-in": string;
+            "register": string;
+            "profile": string;
+            "contact": string;
         };
         "app_name": string;
+        "company_name": string;
+        "company_url": string;
+        "rights": string;
         "welcome": string;
         "description": string;
     };

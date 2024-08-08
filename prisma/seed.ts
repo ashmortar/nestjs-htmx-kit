@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import colors from 'picocolors';
+import * as colors from 'picocolors';
 // import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();

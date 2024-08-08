@@ -8,7 +8,7 @@ describe('UsersController', () => {
   let module: TestingModule;
   let controller: UsersController;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     module = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [
@@ -22,9 +22,9 @@ describe('UsersController', () => {
 
     controller = module.get<UsersController>(UsersController);
   });
-  afterEach(async () => {
+
+  afterAll(async () => {
     await module.close();
-    return;
   });
 
   it('should be defined', () => {
