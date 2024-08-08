@@ -1,4 +1,4 @@
-import { ValidationError } from '@core/components';
+import { ErrorMessage } from '@core/components';
 import {
   ArgumentsHost,
   Catch,
@@ -27,7 +27,7 @@ function Errors({ zodError }: { zodError: ZodError }) {
   return (
     <>
       {zodError.errors.map((issue) => (
-        <ValidationError issue={issue} />
+        <ErrorMessage name={`${issue.path[0]}`} error={issue} oob />
       ))}
     </>
   );

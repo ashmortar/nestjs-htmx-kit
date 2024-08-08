@@ -62,7 +62,7 @@ const load = [
         debug_routes: process.env.DEBUG_ROUTES === '1',
       },
       db: {
-        url: process.env.DB_URL,
+        url: process.env.DATABASE_URL,
       },
       env: process.env.NODE_ENV,
       jwt: {

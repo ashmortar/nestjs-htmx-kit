@@ -1,10 +1,18 @@
-import { EmailInput, Input, Link, PasswordInput } from '@core/components';
+import {
+  Button,
+  EmailInput,
+  Heading1,
+  Link,
+  MainContent,
+  PasswordInput,
+} from '@core/components';
+
 import { Translations } from '@core/i18n/i18n.utils';
 
 export function Register({ t }: Translations) {
   return (
-    <main class="main" id="main">
-      <h1>{t('auth.register.title')}</h1>
+    <MainContent>
+      <Heading1>{t('auth.register.title')}</Heading1>
       <div class="card">
         <div class="form-container">
           <form
@@ -19,20 +27,18 @@ export function Register({ t }: Translations) {
               label={t('auth.register.email') ?? ``}
             />
             <PasswordInput label={t('auth.register.password') ?? ``} />
-            <button class="btn-primary" type="submit">
-              {t('auth.register.submit')}
-            </button>
+            <Button type="submit">{t('auth.register.submit')}</Button>
           </form>
           <Link
             hx-get="/auth/sign-in"
-            class="link"
             hx-target="#main"
             hx-swap="outerHTML"
+            class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
           >
             {t('root.links.sign_in')}
           </Link>
         </div>
       </div>
-    </main>
+    </MainContent>
   );
 }

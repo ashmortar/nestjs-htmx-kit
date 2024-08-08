@@ -7,7 +7,7 @@ export function AuthLinks({ t }: Translations) {
       <ul class="flex flex-1 flex-row list-none p-0">
         <li class="mr-4">
           <Link
-            class="white-link text-sm"
+            class="white-link"
             hx-get="/auth/sign-in"
             hx-target="#main"
             hx-swap="outerHTML"
@@ -17,7 +17,7 @@ export function AuthLinks({ t }: Translations) {
         </li>
         <li>
           <Link
-            class="white-link text-sm"
+            class="white-link"
             hx-get="/auth/register"
             hx-target="#main"
             hx-swap="outerHTML"

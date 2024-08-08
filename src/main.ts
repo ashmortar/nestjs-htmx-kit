@@ -19,9 +19,17 @@ import { I18nService } from 'nestjs-i18n';
 import { I18nTranslations } from '@generated/i18n';
 import { ZodFilter } from './zod/zod.filter';
 import { ZodValidationPipe } from './zod/zod.pipe';
+import { Logger } from 'nestjs-pino';
+import otelSDK from './tracing';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  await otelSDK.start();
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    bufferLogs: true,
+  });
+  const logger = app.get(Logger);
+  app.useLogger(logger);
+  app.flushLogs();
   const config = app.get(ConfigService<Config>);
   const { port, debug_routes } = config.getOrThrow('server');
   const i18n = app.get(I18nService<I18nTranslations>);
@@ -32,7 +40,7 @@ async function bootstrap() {
         directives: {
           scriptSrc: [
             "'self'",
-            'https://cdn.jsdelivr.net/npm/htmx.org/dist/htmx.js',
+            "'sha256-t6dWM2KssN4Zql6ihJ9VKYMUx9+nXRs0nMHCuv9qAZM='",
           ],
         },
       },
@@ -62,19 +70,8 @@ async function bootstrap() {
   if (debug_routes) {
     debugRoutes(app);
   }
-
-  appRunning(await app.getUrl());
 }
 bootstrap().catch(console.error);
-
-function appRunning(url: string) {
-  console.log(
-    colors.magenta(`
-Application is running on:
-${colors.green(url)}
-`),
-  );
-}
 
 function debugRoutes(app: NestExpressApplication) {
   const server = app.getHttpServer();
@@ -103,11 +100,15 @@ function debugRoutes(app: NestExpressApplication) {
       }
       return acc;
     }, {});
-
-  console.table(
-    Object.entries(availableRoutes).map(([route, methods]) => ({
-      route,
-      ...Object.fromEntries(methods.map((m) => [m, '✔'])),
-    })),
-  );
+  setTimeout(async () => {
+    console.table(
+      Object.entries(availableRoutes).map(([route, methods]) => ({
+        route,
+        ...Object.fromEntries(methods.map((m) => [m, '✔'])),
+      })),
+    );
+    console.log(
+      `Application is running on: ${colors.green(await app.getUrl())}`,
+    );
+  }, 1000);
 }

@@ -1,10 +1,11 @@
+import { Heading1, Paragraph, MainContent } from '@core/components';
 import { Translations } from '@core/i18n/i18n.utils';
 
 export function Index({ t }: Translations) {
   return (
-    <main class="main" id="main">
-      <h1>{t('root.welcome')}</h1>
-      <p>{t('root.description')}</p>
-    </main>
+    <MainContent>
+      <Heading1>{t('root.welcome')}</Heading1>
+      <Paragraph>{t('root.description')}</Paragraph>
+    </MainContent>
   );
 }

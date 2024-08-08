@@ -3,14 +3,14 @@ import { Translations } from '@core/i18n/i18n.utils';
 import { PiiType, SessionWithUserPii } from '@core/users/users.service';
 
 export type UserAvatarProps = Translations & {
-  user: SessionWithUserPii['user'];
+  session: SessionWithUserPii;
 };
-export function UserAvatar({ user, t }: UserAvatarProps) {
-  const imgUrl = user.pii.find(
+export function UserAvatar({ session, t }: UserAvatarProps) {
+  const imgUrl = session.user.pii.find(
     (pii) => pii.type === PiiType.profile_photo_url,
   )?.value;
 
-  const [nameToDisplay, initials] = getName(user);
+  const [nameToDisplay, initials] = getName(session.user);
 
   return (
     <Link hx-get="/profile" hx-target="#main">

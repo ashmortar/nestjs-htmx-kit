@@ -31,14 +31,16 @@ export const ApiHtmlPartialResponse = (props: HtmlPartialResponseProps) =>
     }),
   );
 
+type SlashString = `/${string}`;
+
 export type RouteProps = {
-  route?: string;
-  prefix?: string;
+  route?: SlashString;
+  prefix?: SlashString;
   status?: number;
 } & Omit<HtmlPartialResponseProps, 'status'>;
 export function Route({
   route = '/',
-  prefix = '',
+  prefix,
   status = 200,
   ...rest
 }: RouteProps): MethodDecorator {
@@ -48,7 +50,7 @@ export function Route({
       status,
     }),
     Get(route),
-    Header('Hx-Push-Url', prefix + route),
+    Header('Hx-Push-Url', () => `${prefix ?? ``}${route}`),
   );
 }
 

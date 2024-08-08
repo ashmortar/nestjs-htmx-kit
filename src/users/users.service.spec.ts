@@ -72,7 +72,7 @@ describe('UsersService', () => {
     },
   } as const;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     module = await Test.createTestingModule({
       providers: [
         UsersService,
@@ -82,10 +82,10 @@ describe('UsersService', () => {
 
     service = module.get<UsersService>(UsersService);
   });
-  afterEach(async () => {
-    await module.close();
-    return;
-  });
+
+  // afterAll(async () => {
+  //   await module.close();
+  // });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
