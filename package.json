@@ -138,7 +138,7 @@
       "src/**/*.(t|j)s",
       "src/**/*.(t|j)sx"
     ],
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
       "@core/(.*)": "<rootDir>/src/$1",
