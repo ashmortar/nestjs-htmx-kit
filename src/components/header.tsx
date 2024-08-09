@@ -2,7 +2,7 @@ import { Translations } from '@core/i18n/i18n.utils';
 
 import { AppIcon } from './app-icon';
 import { Link, LinkProps } from './link';
-import { SessionWithUserPii } from '@core/users/users.service';
+import { SessionWithUserPii } from '@core/session/session.service';
 import { I18nPath } from '@generated/i18n';
 import { UserAvatar } from '@core/auth/components/user-avatar';
 
@@ -110,7 +110,7 @@ function CollapsibleLinks({
       id="mobile-menu-2"
     >
       <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-        {links.map(({ tKey, ...props }, i) => (
+        {links.map(({ tKey, ...props }) => (
           <li>
             <Link
               {...props}

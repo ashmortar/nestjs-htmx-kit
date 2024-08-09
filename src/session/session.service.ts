@@ -1,6 +1,6 @@
 import { JwtPayload } from '@core/auth/jwt.strategy';
 import { UserAndPiiInclude } from '@core/credentials/credentials.service';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
 import { PrismaService } from 'nestjs-prisma';
@@ -10,8 +10,7 @@ export type SessionWithUserPii = Prisma.SessionGetPayload<
 >;
 
 @Injectable()
-export class UsersService {
-  #log = new Logger(UsersService.name);
+export class SessionService {
   constructor(private readonly db: PrismaService) {}
 
   /**
@@ -21,7 +20,7 @@ export class UsersService {
    */
   async getUserByJwt(jwt: JwtPayload) {
     const { sub: id } = jwt;
-    const session = await this.db.session.findUnique({
+    const session = await this.db.session.findUniqueOrThrow({
       where: { id },
       ...UserAndPiiInclude,
     });

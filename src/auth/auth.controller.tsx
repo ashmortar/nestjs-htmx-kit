@@ -1,4 +1,4 @@
-import { Body, Controller, Logger } from '@nestjs/common';
+import { Body, Controller, Logger, Req, UseGuards } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
 
@@ -17,7 +17,9 @@ import * as P from '@core/auth/pages';
 import { SignInDto } from './schemas/sign-in';
 import { EmailDto } from '@core/validation/schemas';
 import { MainContent } from '@core/components';
-import { SessionWithUserPii } from '@core/users/users.service';
+import { SessionWithUserPii } from '@core/session/session.service';
+import { AuthGuard } from '@nestjs/passport';
+import { Request } from 'express';
 
 const PREFIX = 'auth' as const;
 const prefix = `/${PREFIX}` as const;
@@ -42,7 +44,7 @@ export class AuthController extends Base {
       </nav>
     ),
   })
-  async avatar(@CurrentSession() session: SessionWithUserPii | undefined) {
+  async avatar(@CurrentSession() session?: SessionWithUserPii) {
     if (session) {
       return <UserAvatar session={session} t={this.t} />;
     }
@@ -63,14 +65,14 @@ export class AuthController extends Base {
     return <P.SignIn t={this.t} />;
   }
 
+  @UseGuards(AuthGuard('local'))
   @Form({
     route: '/sign-in',
     status: 201,
     description: 'sign in',
   })
-  async sigInPost(@Body() signInDto: SignInDto) {
-    const user = await this.authService.localSignIn(signInDto);
-    this.logger.log(user);
+  async signInPost(@Body() _: SignInDto, @Req() req: Request) {
+    return req.user;
   }
 
   @Route({

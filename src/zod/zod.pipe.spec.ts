@@ -1,5 +1,18 @@
 import { ArgumentMetadata } from '@nestjs/common';
-import { ZodValidationPipe } from './zod.pipe';
+import { SchemaValidationError, ZodValidationPipe } from './zod.pipe';
+import { ZodError } from 'zod';
+
+describe('SchemaValidationError', () => {
+  it('should create a SchemaValidationError', () => {
+    const schemaValidationError = new SchemaValidationError(
+      new ZodError([]),
+      'value',
+    );
+    expect(schemaValidationError).toBeInstanceOf(Error);
+    expect(schemaValidationError).toBeInstanceOf(ZodError);
+    expect(schemaValidationError).toBeInstanceOf(SchemaValidationError);
+  });
+});
 
 describe('ZodValidationPipe', () => {
   it('should be defined', () => {
@@ -30,6 +43,24 @@ describe('ZodValidationPipe', () => {
       expect(
         pipe.transform(value, metadata as unknown as ArgumentMetadata),
       ).toBe(value);
+    });
+
+    it('should throw a SchemaValidationError if the schema fails', () => {
+      const pipe = new ZodValidationPipe();
+      const schema = {
+        safeParse: jest
+          .fn()
+          .mockReturnValue({ success: false, error: 'error' }),
+      };
+      const metadata = {
+        metatype: {
+          zodSchema: schema,
+        },
+      };
+      const value = 'value';
+      expect(() =>
+        pipe.transform(value, metadata as unknown as ArgumentMetadata),
+      ).toThrow(SchemaValidationError);
     });
   });
 });

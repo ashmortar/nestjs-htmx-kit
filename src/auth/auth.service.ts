@@ -1,20 +1,20 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { SessionWithUserPii, UsersService } from '@core/users/users.service';
 import { ValidGoogleOauthData } from './google-oauth.strategy';
 import { JwtPayload } from './jwt.strategy';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import {
   CredentialsService,
   CredentialWithUserPii,
 } from '@core/credentials/credentials.service';
 import { SignInDto } from './schemas/sign-in';
+import { SessionService } from '@core/session/session.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService,
-    private readonly usersService: UsersService,
+    private readonly sessionService: SessionService,
     private readonly credentialsService: CredentialsService,
   ) {}
 
@@ -22,7 +22,9 @@ export class AuthService {
     return this.jwtService.sign(payload);
   }
 
-  async oauthSignIn(data?: ValidGoogleOauthData): Promise<SessionWithUserPii> {
+  async oauthSignIn(
+    data?: ValidGoogleOauthData,
+  ): Promise<CredentialWithUserPii> {
     if (!data) {
       throw new BadRequestException('Invalid user data');
     }
