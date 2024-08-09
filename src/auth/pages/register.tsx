@@ -5,6 +5,7 @@ import {
   Link,
   MainContent,
   PasswordInput,
+  ConfirmPasswordInput,
 } from '@core/components';
 
 import { Translations } from '@core/i18n/i18n.utils';
@@ -22,11 +23,9 @@ export function Register({ t }: Translations) {
             hx-swap="none"
             class="mb-2"
           >
-            <EmailInput
-              title={t('auth.register.email') ?? ``}
-              label={t('auth.register.email') ?? ``}
-            />
-            <PasswordInput label={t('auth.register.password') ?? ``} />
+            <EmailInput t={t} />
+            <PasswordInput t={t} />
+            <ConfirmPasswordInput t={t} />
             <Button type="submit">{t('auth.register.submit')}</Button>
           </form>
           <Link

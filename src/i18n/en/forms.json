@@ -1,0 +1,29 @@
+{
+  "email": {
+    "label": "Email",
+    "title": "Email",
+    "placeholder": "Enter your email",
+    "required": "Email is required",
+    "invalid": "Email is invalid",
+    "valid": "Email is valid"
+  },
+  "password": {
+    "label": "Password",
+    "title": "Password",
+    "placeholder": "Enter your password",
+    "required": "Password is required",
+    "min_length": "Password must be at least 6 characters",
+    "max_length": "Password must be at most 20 characters",
+    "valid": "Password is valid"
+  },
+  "confirm-password": {
+    "label": "Confirm Password",
+    "title": "Confirm Password",
+    "placeholder": "Enter your password again",
+    "required": "Confirm Password is required",
+    "min_length": "Confirm Password must be at least 6 characters",
+    "max_length": "Confirm Password must be at most 20 characters",
+    "valid": "Confirm Password is valid",
+    "match": "Passwords must match"
+  }
+}

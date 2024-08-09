@@ -5,11 +5,15 @@ export function EmailInput(props: TypedInputProps) {
     <Input
       type="email"
       name="email"
-      label={props.label}
+      label={props.t('forms.email.label')}
+      title={props.t('forms.email.title')}
+      placeholder={props.t('forms.email.placeholder')}
       value={props.value}
-      title={props.title}
-      placeholder={props.placeholder ?? 'name@example.com'}
       required
+      message={props.message}
+      error={props.error}
+      success={props.success}
+      oob={props.oob}
     />
   );
 }

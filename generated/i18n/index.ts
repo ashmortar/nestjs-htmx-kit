@@ -43,6 +43,35 @@ export type I18nTranslations = {
         "title": string;
         "description": string;
     };
+    "forms": {
+        "email": {
+            "label": string;
+            "title": string;
+            "placeholder": string;
+            "required": string;
+            "invalid": string;
+            "valid": string;
+        };
+        "password": {
+            "label": string;
+            "title": string;
+            "placeholder": string;
+            "required": string;
+            "min_length": string;
+            "max_length": string;
+            "valid": string;
+        };
+        "confirm-password": {
+            "label": string;
+            "title": string;
+            "placeholder": string;
+            "required": string;
+            "min_length": string;
+            "max_length": string;
+            "valid": string;
+            "match": string;
+        };
+    };
     "meta": {
         "title": string;
         "description": string;

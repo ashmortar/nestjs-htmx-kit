@@ -19,10 +19,7 @@ export function ForgotPassword({ t }: Translations) {
         hx-swap="none"
         class="mb-2"
       >
-        <EmailInput
-          title={t('auth.forgot_password.email') ?? ``}
-          label={t('auth.forgot_password.email') ?? ``}
-        />
+        <EmailInput t={t} />
         <Button type="submit">{t('auth.forgot_password.submit')}</Button>
       </form>
       <Link

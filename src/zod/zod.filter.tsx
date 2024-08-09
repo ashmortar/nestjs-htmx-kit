@@ -1,4 +1,11 @@
-import { ErrorMessage } from '@core/components';
+import {
+  ConfirmPasswordInput,
+  EmailInput,
+  PasswordInput,
+  type TypedInputProps,
+} from '@core/components';
+import { Translations } from '@core/i18n/i18n.utils';
+import { I18nTranslations } from '@generated/i18n';
 import {
   ArgumentsHost,
   Catch,
@@ -6,10 +13,23 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ZodError } from 'zod';
+import { I18nService } from 'nestjs-i18n';
+import { SchemaValidationError } from './zod.pipe';
 
-@Catch(ZodError)
-export class ZodFilter<T extends ZodError> implements ExceptionFilter {
+const ComponentNameMap: Record<
+  string,
+  (props: TypedInputProps) => JSX.Element
+> = {
+  email: EmailInput,
+  password: PasswordInput,
+  'confirm-password': ConfirmPasswordInput,
+} as const;
+
+@Catch(SchemaValidationError)
+export class ZodFilter<T extends SchemaValidationError>
+  implements ExceptionFilter
+{
+  constructor(private readonly i18nService: I18nService<I18nTranslations>) {}
   catch(exception: T, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -19,16 +39,28 @@ export class ZodFilter<T extends ZodError> implements ExceptionFilter {
       // id's are the path of the error
       // htmx can then oob-swap them into
       // place in the form
-      .send(<Errors zodError={exception} />);
+      .send(
+        <Errors
+          zodError={exception}
+          t={this.i18nService.t.bind(this.i18nService)}
+        />,
+      );
   }
 }
 
-function Errors({ zodError }: { zodError: ZodError }) {
+function Errors({
+  zodError,
+  t,
+}: { zodError: SchemaValidationError } & Translations) {
   return (
     <>
-      {zodError.errors.map((issue) => (
-        <ErrorMessage name={`${issue.path[0]}`} error={issue} oob />
-      ))}
+      {zodError.errors.map((issue) => {
+        const name = issue.path.join('-');
+        const Component = ComponentNameMap[name];
+        return (
+          <Component error={issue} t={t} oob value={zodError.value[name]} />
+        );
+      })}
     </>
   );
 }

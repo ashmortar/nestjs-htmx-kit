@@ -19,11 +19,8 @@ export function SignIn({ t }: Translations) {
         hx-swap="none"
         class="mb-2"
       >
-        <EmailInput
-          title={t('auth.sign_in.email') ?? ``}
-          label={t('auth.sign_in.email') ?? ``}
-        />
-        <PasswordInput label={t('auth.sign_in.password') ?? ``} />
+        <EmailInput t={t} />
+        <PasswordInput t={t} />
         <Button type="submit">{t('auth.sign_in.submit')}</Button>
       </form>
       <Link

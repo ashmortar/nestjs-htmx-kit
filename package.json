@@ -9,7 +9,7 @@
     "copy:flowbite": "cp -r node_modules/flowbite/dist/flowbite.min.js public/flowbite.min.js",
     "build:css": "npm run copy:flowbite && tailwindcss -i ./src/tailwind.css -o ./public/styles.css --minify",
     "watch:css": "npm run copy:flowbite && tailwindcss -i ./src/tailwind.css -o ./public/styles.css --watch",
-    "build": "npm run build:css && nest build",
+    "build": "npm run prisma:generate && npm run build:css && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "npm run build:css && nest start",
     "start:dev": "concurrently \"npm run watch:css\" \"nest start --watch\"",

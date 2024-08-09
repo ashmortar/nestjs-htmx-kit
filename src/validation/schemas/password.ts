@@ -16,16 +16,20 @@ export const PasswordZ = extendApi(
 
 export class PasswordDto extends createZodDto(PasswordZ) {}
 
-export const PasswordResponseZ = extendApi(
-  z.object({
-    success: z.boolean(),
-    value: z.string(),
-  }),
+export const ConfirmPasswordZ = extendApi(
+  z
+    .object({
+      password: passwordSchema,
+      'confirm-password': passwordSchema,
+    })
+    .refine((data) => data.password === data['confirm-password'], {
+      message: "Passwords don't match",
+      path: ['confirm-password'], // path of error
+    }),
   {
-    title: 'Password Validation Response',
-    description:
-      'success/failure of password validation and the corresponding error message',
+    title: 'Confirm Password',
+    description: 'Confirm Password validation',
   },
 );
 
-export class PasswordResponseDto extends createZodDto(PasswordResponseZ) {}
+export class ConfirmPasswordDto extends createZodDto(ConfirmPasswordZ) {}

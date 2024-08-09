@@ -1,5 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ValidationController } from './validation.controller';
+import { I18nModule } from 'nestjs-i18n';
+import i18n_opts from '@core/config/i18n';
 
 describe('ValidationController', () => {
   let module: TestingModule;
@@ -7,6 +9,7 @@ describe('ValidationController', () => {
 
   beforeAll(async () => {
     module = await Test.createTestingModule({
+      imports: [I18nModule.forRoot(i18n_opts)],
       controllers: [ValidationController],
     }).compile();
 

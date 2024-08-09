@@ -49,7 +49,7 @@ async function bootstrap() {
   app.use(cookieParser(config.getOrThrow('cookies').secret));
   app.useGlobalPipes(new ZodValidationPipe());
   app.useGlobalPipes(new ValidationPipe());
-  app.useGlobalFilters(new ZodFilter());
+  app.useGlobalFilters(new ZodFilter(i18n));
   const { title, description, version } = config.getOrThrow('app');
   const swaggerConfig = new DocumentBuilder()
     .setTitle(title)
