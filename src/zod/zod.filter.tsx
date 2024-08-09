@@ -48,7 +48,7 @@ export class ZodFilter<T extends SchemaValidationError>
   }
 }
 
-function Errors({
+export function Errors({
   zodError,
   t,
 }: { zodError: SchemaValidationError } & Translations) {

@@ -3,8 +3,11 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Config } from '@core/config/app';
-import { UsersService } from '@core/users/users.service';
 import { Request } from 'express';
+import {
+  SessionService,
+  SessionWithUserPii,
+} from '@core/session/session.service';
 
 export type JwtPayload = {
   sub: string;
@@ -13,8 +16,8 @@ export type JwtPayload = {
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(
-    private readonly usersService: UsersService,
-    private readonly configService: ConfigService<Config>,
+    private readonly sessionService: SessionService,
+    configService: ConfigService<Config>,
   ) {
     const extractJwtFromCookie = (req: Request) => {
       let token = null;
@@ -31,8 +34,8 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  async validate(payload: JwtPayload) {
-    const session = await this.usersService.getUserByJwt(payload);
+  async validate(payload: JwtPayload): Promise<SessionWithUserPii> {
+    const session = await this.sessionService.getUserByJwt(payload);
 
     if (!session?.user)
       throw new UnauthorizedException('Please log in to continue');

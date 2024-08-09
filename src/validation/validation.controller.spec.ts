@@ -23,4 +23,49 @@ describe('ValidationController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  describe('email', () => {
+    it('should return a success email component', async () => {
+      const result = await controller.email({ email: 'email@email.com' });
+      [
+        '<div class="mb-6" id="email-input" hx-swap-oob="true">',
+        'text-green-600',
+        'value="email@email.com"',
+        'valid email',
+      ].forEach((el) => {
+        expect(result).toContain(el);
+      });
+    });
+  });
+
+  describe('password', () => {
+    it('should return a success password component', async () => {
+      const result = await controller.password({ password: 'password' });
+      [
+        '<div class="mb-6" id="password-input" hx-swap-oob="true">',
+        'text-green-600',
+        'value="password"',
+        'password is valid',
+      ].forEach((el) => {
+        expect(result).toContain(el);
+      });
+    });
+  });
+
+  describe('confirmPassword', () => {
+    it('should return a success confirm password component', async () => {
+      const result = await controller.confirmPassword({
+        password: 'password',
+        'confirm-password': 'password',
+      });
+      [
+        '<div class="mb-6" id="confirm-password-input" hx-swap-oob="true">',
+        'text-green-600',
+        'value="password"',
+        'passwords match',
+      ].forEach((el) => {
+        expect(result).toContain(el);
+      });
+    });
+  });
 });

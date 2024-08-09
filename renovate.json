@@ -8,6 +8,6 @@
     ":pinAllExceptPeerDependencies",
     "npm:unpublishSafe"
   ],
-  "prConcurrentLimit": 1,
+  "prConcurrentLimit": 3,
   "labels": ["dependencies"]
 }

@@ -26,7 +26,12 @@ const pinoOpts = {
           process.env.NODE_ENV === 'production' ? undefined : 'pid,hostname',
       },
     },
-    level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
+    level:
+      process.env.NODE_ENV === 'test'
+        ? 'silent'
+        : process.env.NODE_ENV !== 'production'
+          ? 'debug'
+          : 'info',
     formatters: {
       level(label, _) {
         return { level: label };

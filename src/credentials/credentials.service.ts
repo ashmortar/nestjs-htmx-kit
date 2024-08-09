@@ -152,10 +152,8 @@ export class CredentialsService {
    * @param email
    * @returns
    */
-  async findLocalUserByEmail(
-    email: string,
-  ): Promise<CredentialWithUserPii | null> {
-    return this.db.credential.findUnique({
+  async findLocalUserByEmail(email: string): Promise<CredentialWithUserPii> {
+    return this.db.credential.findUniqueOrThrow({
       where: {
         user: { pii: { some: { type: 'email', value: email } } },
         type_external_id: { type: 'password', external_id: email },

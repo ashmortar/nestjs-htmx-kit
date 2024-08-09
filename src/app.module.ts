@@ -7,13 +7,11 @@ import opts from './config/app';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { I18nModule } from 'nestjs-i18n';
-import { UsersModule } from './users/users.module';
 import { ValidationModule } from './validation/validation.module';
 import i18n_opts from './config/i18n';
 import { LoggerModule } from 'nestjs-pino';
 import pinoOpts from './config/pino';
 import { OpenTelemetryModule } from 'nestjs-otel';
-import { CredentialsService } from './credentials/credentials.service';
 
 @Module({
   controllers: [AppController],
@@ -36,9 +34,7 @@ import { CredentialsService } from './credentials/credentials.service';
     PrismaModule.forRoot(),
     I18nModule.forRoot(i18n_opts),
     AuthModule,
-    UsersModule,
     ValidationModule,
   ],
-  providers: [CredentialsService],
 })
 export class AppModule {}
