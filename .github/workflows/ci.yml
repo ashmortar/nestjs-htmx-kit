@@ -37,7 +37,7 @@ jobs:
       - name: Test
         run: npm run test:cov
       - name: Run CTRF annotations
-        run: npx gitub-actions-ctrf ./coverage/coverage-final.json
+        run: npx github-actions-ctrf ./coverage/coverage-final.json
 
   build:
     runs-on: ubuntu-latest
