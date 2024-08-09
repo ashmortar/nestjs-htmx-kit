@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UsersService } from '@core/users/users.service';
 import { PrismaService } from 'nestjs-prisma';
 import { prismaMock } from '../../prisma/singleton';
+import { CredentialsService } from '@core/credentials/credentials.service';
 
 describe('AuthService', () => {
   let module: TestingModule;
@@ -15,6 +16,7 @@ describe('AuthService', () => {
       providers: [
         AuthService,
         UsersService,
+        CredentialsService,
         { provide: PrismaService, useValue: prismaMock },
       ],
     }).compile();

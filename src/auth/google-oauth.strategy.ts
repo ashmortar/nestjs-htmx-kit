@@ -1,5 +1,6 @@
 import { Config } from '@core/config/app';
-import { PiiType } from '@core/users/users.service';
+import { PiiType } from '@core/credentials/credentials.service';
+
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';

@@ -13,6 +13,7 @@ import i18n_opts from './config/i18n';
 import { LoggerModule } from 'nestjs-pino';
 import pinoOpts from './config/pino';
 import { OpenTelemetryModule } from 'nestjs-otel';
+import { CredentialsService } from './credentials/credentials.service';
 
 @Module({
   controllers: [AppController],
@@ -38,5 +39,6 @@ import { OpenTelemetryModule } from 'nestjs-otel';
     UsersModule,
     ValidationModule,
   ],
+  providers: [CredentialsService],
 })
 export class AppModule {}

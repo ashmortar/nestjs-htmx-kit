@@ -9,6 +9,7 @@ import { prismaMock } from '../../prisma/singleton';
 import { I18nModule } from 'nestjs-i18n';
 import i18n_opts from '@core/config/i18n';
 import opts from '@core/config/app';
+import { CredentialsService } from '@core/credentials/credentials.service';
 
 describe('AuthController', () => {
   let module: TestingModule;
@@ -27,6 +28,7 @@ describe('AuthController', () => {
       providers: [
         AuthService,
         UsersService,
+        CredentialsService,
         { provide: PrismaService, useValue: prismaMock },
       ],
       controllers: [AuthController],
