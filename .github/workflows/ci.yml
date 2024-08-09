@@ -36,6 +36,8 @@ jobs:
         run: cp ./.env.test.example ./.env.test
       - name: Test
         run: npm run test:cov
+      - name: Run CTRF annotations
+        run: npx gitub-actions-ctrf ./coverage/coverage-final.json
 
   build:
     runs-on: ubuntu-latest
