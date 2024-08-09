@@ -1,12 +1,12 @@
 import { ZodValidationPipe } from '@anatine/zod-nestjs';
 import { AppModule } from '@core/app.module';
-import { Config } from '@core/config/app';
+import opts, { Config } from '@core/config/app';
 
 import { HtmxInterceptor } from '@core/htmx/htmx.interceptor';
 import { ZodFilter } from '@core/zod/zod.filter';
 import { I18nTranslations } from '@generated/i18n';
 import { ValidationPipe } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
 
 import { I18nService } from 'nestjs-i18n';
@@ -15,7 +15,10 @@ import { Logger } from 'nestjs-pino';
 export async function setupApp() {
   const moduleFixture = await Test.createTestingModule({
     imports: [AppModule],
-  }).compile();
+  })
+    .overrideModule(ConfigModule)
+    .useModule(ConfigModule.forRoot({ ...opts, envFilePath: '.env.test' }))
+    .compile();
 
   const app = moduleFixture.createNestApplication();
   const logger = app.get(Logger);
