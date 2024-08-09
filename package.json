@@ -116,8 +116,13 @@
   "browserslist": "last 2 versions",
   "jest": {
     "reporters": [
-      "default",
-      "github-actions"
+      [
+        "github-actions",
+        {
+          "silent": false
+        }
+      ],
+      "summary"
     ],
     "moduleFileExtensions": [
       "js",
