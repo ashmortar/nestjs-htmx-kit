@@ -1,11 +1,11 @@
-import { Body, Controller } from '@nestjs/common';
+import { Body, Controller, Logger } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
 
 import { ConfigService } from '@nestjs/config';
 import { Config } from '@core/config/app';
 import { CurrentSession } from './current-session.decorator';
-import { SessionWithUserPii } from '@core/users/users.service';
+
 import { UserAvatar } from './components/user-avatar';
 import { AuthLinks } from './components/auth-links';
 import { Base } from '@core/base/base.controller';
@@ -17,11 +17,14 @@ import * as P from '@core/auth/pages';
 import { SignInDto } from './schemas/sign-in';
 import { EmailDto } from '@core/validation/schemas';
 import { MainContent } from '@core/components';
+import { SessionWithUserPii } from '@core/users/users.service';
+
 const PREFIX = 'auth' as const;
 const prefix = `/${PREFIX}` as const;
 
 @Controller(PREFIX)
 export class AuthController extends Base {
+  logger = new Logger(AuthController.name);
   constructor(
     private readonly configService: ConfigService<Config>,
     private readonly authService: AuthService,
@@ -66,7 +69,8 @@ export class AuthController extends Base {
     description: 'sign in',
   })
   async sigInPost(@Body() signInDto: SignInDto) {
-    console.log(signInDto);
+    const user = await this.authService.localSignIn(signInDto);
+    this.logger.log(user);
   }
 
   @Route({
@@ -89,7 +93,8 @@ export class AuthController extends Base {
     description: 'register',
   })
   async registerPost(@Body() signInDto: SignInDto) {
-    console.log(signInDto);
+    const user = await this.authService.localRegister(signInDto);
+    this.logger.log(user);
   }
 
   @Route({
