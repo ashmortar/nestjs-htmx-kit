@@ -1,25 +1,25 @@
 import { Body, Controller, Logger, Req, UseGuards } from '@nestjs/common';
 
+import { ConfigService } from '@nestjs/config';
+import { I18nService } from 'nestjs-i18n';
+import { AuthGuard } from '@nestjs/passport';
+import { Request } from 'express';
 import { AuthService } from './auth.service';
 
-import { ConfigService } from '@nestjs/config';
-import { Config } from '@core/config/app';
 import { CurrentSession } from './current-session.decorator';
-
 import { UserAvatar } from './components/user-avatar';
 import { AuthLinks } from './components/auth-links';
+import { SignInDto } from './schemas/sign-in';
+import { Config } from '@core/config/app';
+
 import { Base } from '@core/base/base.controller';
-import { I18nService } from 'nestjs-i18n';
 import { I18nTranslations } from '@generated/i18n';
 import { Form, Partial, Route } from '@core/htmx/htmx.decorator';
 import * as P from '@core/auth/pages';
 
-import { SignInDto } from './schemas/sign-in';
 import { EmailDto } from '@core/validation/schemas';
 import { MainContent } from '@core/components';
 import { SessionWithUserPii } from '@core/session/session.service';
-import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
 
 const PREFIX = 'auth' as const;
 const prefix = `/${PREFIX}` as const;

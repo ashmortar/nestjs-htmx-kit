@@ -1,5 +1,5 @@
-import { I18nTranslations } from '@generated/i18n';
-import { I18nService } from 'nestjs-i18n';
+import type { I18nService } from 'nestjs-i18n';
+import type { I18nTranslations } from '@generated/i18n';
 
 export abstract class Base {
   languages: I18nService['getSupportedLanguages'];

@@ -1,5 +1,5 @@
-import { ZodDtoStatic } from '@anatine/zod-nestjs';
-import { PipeTransform, ArgumentMetadata } from '@nestjs/common';
+import type { ZodDtoStatic } from '@anatine/zod-nestjs';
+import type { PipeTransform, ArgumentMetadata } from '@nestjs/common';
 import { ZodError } from 'zod';
 
 export class SchemaValidationError<Input = any> extends ZodError<Input> {

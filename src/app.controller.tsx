@@ -1,10 +1,10 @@
+import { Controller } from '@nestjs/common';
+import { I18nService } from 'nestjs-i18n';
 import { Base } from '@core/base/base.controller';
 import { Route } from '@core/htmx/htmx.decorator';
 import { mockT } from '@core/i18n/i18n.utils';
 import * as P from '@core/pages';
 import { I18nTranslations } from '@generated/i18n';
-import { Controller } from '@nestjs/common';
-import { I18nService } from 'nestjs-i18n';
 
 @Controller()
 export class AppController extends Base {

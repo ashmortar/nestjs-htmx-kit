@@ -1,10 +1,10 @@
-import { ValidGoogleOauthData } from '@core/auth/google-oauth.strategy';
 import { Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from 'nestjs-prisma';
 import * as bcrypt from 'bcrypt';
 import { addDays } from 'date-fns';
 import { pick } from 'lodash';
+import { ValidGoogleOauthData } from '@core/auth/google-oauth.strategy';
 
 export const VerifiablePiiTypes = ['email', 'phone'] as const;
 export type VerifiablePiiType = (typeof VerifiablePiiTypes)[number];

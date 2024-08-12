@@ -1,8 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { ConfigModule } from '@nestjs/config';
-import opts from './config/app';
 import { I18nModule } from 'nestjs-i18n';
+import { AppController } from './app.controller';
+import opts from './config/app';
 import i18n_opts from './config/i18n';
 
 describe('AppController', () => {

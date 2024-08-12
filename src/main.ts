@@ -1,26 +1,23 @@
-import { NestFactory } from '@nestjs/core';
-import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
-import { AppModule } from './app.module';
+import type { NestExpressApplication } from '@nestjs/platform-express';
+import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { Config } from './config/app';
 import helmet from 'helmet';
 import colors from 'picocolors';
 import cookieParser from 'cookie-parser';
-import {
-  DocumentBuilder,
-  SwaggerCustomOptions,
-  SwaggerModule,
-} from '@nestjs/swagger';
+import type { SwaggerCustomOptions } from '@nestjs/swagger';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { patchNestjsSwagger } from '@anatine/zod-nestjs';
-import { HtmxInterceptor } from './htmx/htmx.interceptor';
 import { I18nService } from 'nestjs-i18n';
-import { I18nTranslations } from '@generated/i18n';
+import { Logger } from 'nestjs-pino';
 import { ZodFilter } from './zod/zod.filter';
 import { ZodValidationPipe } from './zod/zod.pipe';
-import { Logger } from 'nestjs-pino';
+import { HtmxInterceptor } from './htmx/htmx.interceptor';
+import { AppModule } from './app.module';
+import type { Config } from './config/app';
 import otelSDK from './tracing';
+import type { I18nTranslations } from '@generated/i18n';
 
 async function bootstrap() {
   await otelSDK.start();

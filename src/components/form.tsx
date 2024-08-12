@@ -1,4 +1,4 @@
-import { ClassName } from './types';
+import type { ClassName } from './types';
 
 export type FormProps = ClassName &
   (

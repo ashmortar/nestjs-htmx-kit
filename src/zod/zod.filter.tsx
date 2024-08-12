@@ -1,12 +1,4 @@
 import {
-  ConfirmPasswordInput,
-  EmailInput,
-  PasswordInput,
-  type TypedInputProps,
-} from '@core/components';
-import { Translations } from '@core/i18n/i18n.utils';
-import { I18nTranslations } from '@generated/i18n';
-import {
   ArgumentsHost,
   Catch,
   ExceptionFilter,
@@ -15,6 +7,14 @@ import {
 import { Response } from 'express';
 import { I18nService } from 'nestjs-i18n';
 import { SchemaValidationError } from './zod.pipe';
+import { I18nTranslations } from '@generated/i18n';
+import { Translations } from '@core/i18n/i18n.utils';
+import {
+  ConfirmPasswordInput,
+  EmailInput,
+  PasswordInput,
+  type TypedInputProps,
+} from '@core/components';
 
 const ComponentNameMap: Record<
   string,

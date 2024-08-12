@@ -1,6 +1,6 @@
-import { Translations } from '@core/i18n/i18n.utils';
+import type { Translations } from '@core/i18n/i18n.utils';
 import { Header, Footer } from '@core/components';
-import { SessionWithUserPii } from '@core/session/session.service';
+import type { SessionWithUserPii } from '@core/session/session.service';
 
 export function HtmlDoc(
   props: Html.PropsWithChildren<{

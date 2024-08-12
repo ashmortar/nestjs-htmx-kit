@@ -1,7 +1,6 @@
-import { Translations } from '@core/i18n/i18n.utils';
-
 import { Link } from './link';
 import { AppIcon } from './app-icon';
+import type { Translations } from '@core/i18n/i18n.utils';
 
 export function Footer({ t }: Translations) {
   const year = new Date().getFullYear();

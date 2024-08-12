@@ -9,5 +9,11 @@
     "npm:unpublishSafe"
   ],
   "prConcurrentLimit": 3,
+  "packageRules": [
+    {
+      "matchPackageNames": ["@kitajs/html", "@kitajs/ts-html-plugin"],
+      "label": "kitajs monorepo"
+    }
+  ],
   "labels": ["dependencies"]
 }

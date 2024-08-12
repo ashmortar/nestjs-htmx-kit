@@ -1,7 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { SessionService } from './session.service';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { PrismaService } from 'nestjs-prisma';
 import { prismaMock } from '../../prisma/singleton';
+import { SessionService } from './session.service';
 import { UserAndPiiInclude } from '@core/credentials/credentials.service';
 
 describe('SessionService', () => {

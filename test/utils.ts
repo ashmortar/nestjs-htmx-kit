@@ -1,5 +1,5 @@
-import { ArgumentsHost } from '@nestjs/common';
-import { Request } from 'express';
+import type { ArgumentsHost } from '@nestjs/common';
+import type { Request } from 'express';
 import { mockDeep } from 'jest-mock-extended';
 
 export const mockArgumentsHost = mockDeep<ArgumentsHost>({

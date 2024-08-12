@@ -1,5 +1,6 @@
-import { AcceptLanguageResolver, I18nOptions } from 'nestjs-i18n';
 import * as path from 'node:path';
+import type { I18nOptions } from 'nestjs-i18n';
+import { AcceptLanguageResolver } from 'nestjs-i18n';
 
 const i18n_opts = {
   fallbackLanguage: 'en',

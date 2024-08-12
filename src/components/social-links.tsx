@@ -1,6 +1,6 @@
-import type { Translations } from '@core/i18n/i18n.utils';
 import { AppIcon } from './app-icon';
 import { Link } from './link';
+import type { Translations } from '@core/i18n/i18n.utils';
 
 export type SocialLinksProps = Translations & { sidebar?: boolean };
 

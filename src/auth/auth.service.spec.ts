@@ -1,8 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { JwtModule } from '@nestjs/jwt';
 import { PrismaService } from 'nestjs-prisma';
 import { prismaMock } from '../../prisma/singleton';
+import { AuthService } from './auth.service';
 import { CredentialsService } from '@core/credentials/credentials.service';
 import { SessionService } from '@core/session/session.service';
 

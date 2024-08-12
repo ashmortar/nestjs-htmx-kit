@@ -1,7 +1,7 @@
 import { Link } from '@core/components';
 import { PiiType } from '@core/credentials/credentials.service';
-import { Translations } from '@core/i18n/i18n.utils';
-import { SessionWithUserPii } from '@core/session/session.service';
+import type { Translations } from '@core/i18n/i18n.utils';
+import type { SessionWithUserPii } from '@core/session/session.service';
 
 export type UserAvatarProps = Translations & {
   session: SessionWithUserPii;

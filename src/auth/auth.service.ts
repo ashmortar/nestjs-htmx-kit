@@ -1,13 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
 import { ValidGoogleOauthData } from './google-oauth.strategy';
 import { JwtPayload } from './jwt.strategy';
-import * as bcrypt from 'bcrypt';
+import { SignInDto } from './schemas/sign-in';
 import {
   CredentialsService,
   CredentialWithUserPii,
 } from '@core/credentials/credentials.service';
-import { SignInDto } from './schemas/sign-in';
 import { SessionService } from '@core/session/session.service';
 
 @Injectable()

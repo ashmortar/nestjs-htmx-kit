@@ -1,7 +1,7 @@
 import { createZodDto } from '@anatine/zod-nestjs';
 import { extendApi } from '@anatine/zod-openapi';
-import { emailSchema, passwordSchema } from '@core/validation/schemas';
 import { z } from 'zod';
+import { emailSchema, passwordSchema } from '@core/validation/schemas';
 
 export const SignInZ = extendApi(
   z.object({

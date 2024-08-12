@@ -6,11 +6,11 @@ import {
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
-import { HtmlDoc } from '@core/layouts';
-import { isHtmlFragment, isHtmxRequest } from './htmx.utils';
 import { ConfigService } from '@nestjs/config';
-import { Config } from '@core/config/app';
 import { I18nService } from 'nestjs-i18n';
+import { isHtmlFragment, isHtmxRequest } from './htmx.utils';
+import { HtmlDoc } from '@core/layouts';
+import { Config } from '@core/config/app';
 import { I18nTranslations } from '@generated/i18n';
 @Injectable()
 export class HtmxInterceptor implements NestInterceptor {

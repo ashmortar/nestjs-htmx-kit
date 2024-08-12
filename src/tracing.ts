@@ -1,3 +1,4 @@
+import * as process from 'process';
 import {
   CompositePropagator,
   W3CTraceContextPropagator,
@@ -11,7 +12,6 @@ import { B3InjectEncoding, B3Propagator } from '@opentelemetry/propagator-b3';
 import { PrometheusExporter } from '@opentelemetry/exporter-prometheus';
 import { NodeSDK } from '@opentelemetry/sdk-node';
 import { AsyncLocalStorageContextManager } from '@opentelemetry/context-async-hooks';
-import * as process from 'process';
 import { PinoInstrumentation } from '@opentelemetry/instrumentation-pino';
 
 const otelSDK = new NodeSDK({

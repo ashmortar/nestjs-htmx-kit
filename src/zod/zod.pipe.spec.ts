@@ -1,6 +1,6 @@
-import { ArgumentMetadata } from '@nestjs/common';
-import { SchemaValidationError, ZodValidationPipe } from './zod.pipe';
+import type { ArgumentMetadata } from '@nestjs/common';
 import { ZodError } from 'zod';
+import { SchemaValidationError, ZodValidationPipe } from './zod.pipe';
 
 describe('SchemaValidationError', () => {
   it('should create a SchemaValidationError', () => {

@@ -1,6 +1,5 @@
-import { I18nTranslations } from '@generated/i18n';
-
-import { I18nService, TranslateOptions } from 'nestjs-i18n';
+import type { I18nService, TranslateOptions } from 'nestjs-i18n';
+import type { I18nTranslations } from '@generated/i18n';
 
 export type Translations = {
   t: I18nService<I18nTranslations>['translate'];

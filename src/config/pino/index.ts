@@ -1,5 +1,5 @@
-import { Params } from 'nestjs-pino';
-import pino from 'pino';
+import type { Params } from 'nestjs-pino';
+import { destination } from 'pino';
 import { trace, context } from '@opentelemetry/api';
 import redact from './redact';
 
@@ -12,7 +12,7 @@ const pinoOpts = {
       if (!spanContext) return req.id;
       return spanContext.traceId;
     },
-    stream: pino.destination(1),
+    stream: destination(1),
     redact,
     transport: {
       target: 'pino-pretty',

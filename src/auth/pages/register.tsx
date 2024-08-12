@@ -8,7 +8,7 @@ import {
   ConfirmPasswordInput,
 } from '@core/components';
 
-import { Translations } from '@core/i18n/i18n.utils';
+import type { Translations } from '@core/i18n/i18n.utils';
 
 export function Register({ t }: Translations) {
   return (
