@@ -10,7 +10,7 @@ export type Variants = OutlineVariants | 'alternative' | 'light';
 
 export type OutlineProps = JSX.HtmlButtonTag & {
   variant?: OutlineVariants;
-} & PropsWithChildren;
+} & Html.PropsWithChildren;
 
 const OutlineVariants: Record<OutlineVariants, string> = {
   default:
@@ -70,7 +70,7 @@ const ButtonVariants: Record<Variants, string> = {
 
 export type ButtonProps = JSX.HtmlButtonTag & {
   variant?: Variants;
-} & PropsWithChildren;
+} & Html.PropsWithChildren;
 
 export function Button({
   variant = 'default',

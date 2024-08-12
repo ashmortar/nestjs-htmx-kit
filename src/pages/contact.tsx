@@ -1,6 +1,6 @@
 import { Heading1, MainContent, Paragraph } from '@core/components';
 
-import { Translations } from '@core/i18n/i18n.utils';
+import type { Translations } from '@core/i18n/i18n.utils';
 
 export function Contact({ t }: Translations) {
   return (

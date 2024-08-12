@@ -1,4 +1,5 @@
 import { Body, Controller } from '@nestjs/common';
+import { I18nService } from 'nestjs-i18n';
 import { ConfirmPasswordDto, EmailDto, PasswordDto } from './schemas';
 import {
   ConfirmPasswordInput,
@@ -9,7 +10,6 @@ import { Form } from '@core/htmx/htmx.decorator';
 import { mockT } from '@core/i18n/i18n.utils';
 import { Base } from '@core/base/base.controller';
 import { I18nTranslations } from '@generated/i18n';
-import { I18nService } from 'nestjs-i18n';
 
 @Controller('validation')
 export class ValidationController extends Base {

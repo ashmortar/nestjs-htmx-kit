@@ -1,5 +1,5 @@
 import { Link } from '@core/components';
-import { Translations } from '@core/i18n/i18n.utils';
+import type { Translations } from '@core/i18n/i18n.utils';
 
 export function AuthLinks({ t }: Translations) {
   return (

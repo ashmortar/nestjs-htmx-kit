@@ -1,9 +1,9 @@
-import { Translations } from '@core/i18n/i18n.utils';
-
 import { AppIcon } from './app-icon';
-import { Link, LinkProps } from './link';
-import { SessionWithUserPii } from '@core/session/session.service';
-import { I18nPath } from '@generated/i18n';
+import type { LinkProps } from './link';
+import { Link } from './link';
+import type { Translations } from '@core/i18n/i18n.utils';
+import type { SessionWithUserPii } from '@core/session/session.service';
+import type { I18nPath } from '@generated/i18n';
 import { UserAvatar } from '@core/auth/components/user-avatar';
 
 export type HeaderLink = LinkProps & { tKey: I18nPath };

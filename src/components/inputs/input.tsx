@@ -1,6 +1,6 @@
-import { ZodIssue } from 'zod';
-import { ClassName } from '../types';
-import { Translations } from '@core/i18n/i18n.utils';
+import type { ZodIssue } from 'zod';
+import type { ClassName } from '../types';
+import type { Translations } from '@core/i18n/i18n.utils';
 
 export type InputProps = ClassName & {
   type: JSX.HtmlInputTag['type'];

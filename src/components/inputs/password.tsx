@@ -1,4 +1,5 @@
-import { Input, TypedInputProps } from './input';
+import type { TypedInputProps } from './input';
+import { Input } from './input';
 
 export function PasswordInput(props: TypedInputProps) {
   return (
