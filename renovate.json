@@ -14,6 +14,5 @@
       "matchPackageNames": ["@kitajs/html", "@kitajs/ts-html-plugin"],
       "groupName": "Kitajs"
     }
-  ],
-  "labels": ["dependencies"]
+  ]
 }
