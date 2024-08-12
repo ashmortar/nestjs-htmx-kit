@@ -1,6 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ValidationController } from './validation.controller';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { I18nModule } from 'nestjs-i18n';
+import { ValidationController } from './validation.controller';
 import i18n_opts from '@core/config/i18n';
 
 describe('ValidationController', () => {

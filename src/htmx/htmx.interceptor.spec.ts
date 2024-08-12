@@ -1,10 +1,12 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { HtmxInterceptor } from './htmx.interceptor';
-import opts, { Config } from '@core/config/app';
-import i18n_opts from '@core/config/i18n';
-import { TestingModule, Test } from '@nestjs/testing';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { I18nModule, I18nService } from 'nestjs-i18n';
-import { I18nTranslations } from '@generated/i18n';
+import { HtmxInterceptor } from './htmx.interceptor';
+import type { Config } from '@core/config/app';
+import opts from '@core/config/app';
+import i18n_opts from '@core/config/i18n';
+import type { I18nTranslations } from '@generated/i18n';
 
 describe('HtmxInterceptor', () => {
   let app: TestingModule;

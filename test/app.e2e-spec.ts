@@ -1,4 +1,4 @@
-import { INestApplication } from '@nestjs/common';
+import type { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { setupApp } from './setup-app';
 

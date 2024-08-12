@@ -2,8 +2,8 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Config } from '@core/config/app';
 import { Request } from 'express';
+import { Config } from '@core/config/app';
 import {
   SessionService,
   SessionWithUserPii,

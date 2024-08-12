@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from '@kitajs/html';
 import { ClassName } from './types';
 
 export type FormProps = ClassName &
@@ -12,6 +13,6 @@ export type FormProps = ClassName &
       }
   );
 
-export function Form({ children, ...rest }: Html.PropsWithChildren<FormProps>) {
+export function Form({ children, ...rest }: PropsWithChildren<FormProps>) {
   return <form {...rest}>{children}</form>;
 }

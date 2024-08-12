@@ -1,9 +1,10 @@
 import { Translations } from '@core/i18n/i18n.utils';
 import { Header, Footer } from '@core/components';
 import { SessionWithUserPii } from '@core/session/session.service';
+import type { PropsWithChildren } from '@kitajs/html';
 
 export function HtmlDoc(
-  props: Html.PropsWithChildren<{
+  props: PropsWithChildren<{
     debugHtmx?: boolean;
     session?: SessionWithUserPii;
   }> &

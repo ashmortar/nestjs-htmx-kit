@@ -1,15 +1,13 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import {
-  CredentialsService,
-  CredentialWithUserPii,
-  UserAndPiiInclude,
-} from './credentials.service';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { PrismaService } from 'nestjs-prisma';
-import { ValidGoogleOauthData } from '@core/auth/google-oauth.strategy';
 import { faker } from '@faker-js/faker';
-import { User, Pii, Credential, Prisma } from '@prisma/client';
+import type { User, Pii, Credential, Prisma } from '@prisma/client';
 import { pick } from 'lodash';
 import { prismaMock } from '../../prisma/singleton';
+import { CredentialsService, UserAndPiiInclude } from './credentials.service';
+import type { CredentialWithUserPii } from './credentials.service';
+import type { ValidGoogleOauthData } from '@core/auth/google-oauth.strategy';
 
 describe('CredentialsService', () => {
   let service: CredentialsService;

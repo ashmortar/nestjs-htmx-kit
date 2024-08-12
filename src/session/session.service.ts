@@ -1,9 +1,9 @@
-import { JwtPayload } from '@core/auth/jwt.strategy';
-import { UserAndPiiInclude } from '@core/credentials/credentials.service';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
 import { PrismaService } from 'nestjs-prisma';
+import { UserAndPiiInclude } from '@core/credentials/credentials.service';
+import { JwtPayload } from '@core/auth/jwt.strategy';
 
 export type SessionWithUserPii = Prisma.SessionGetPayload<
   typeof UserAndPiiInclude

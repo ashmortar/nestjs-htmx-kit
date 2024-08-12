@@ -1,11 +1,12 @@
 import { I18nModule, I18nService } from 'nestjs-i18n';
-import { Errors, ZodFilter } from './zod.filter';
-import { Test, TestingModule } from '@nestjs/testing';
-import i18n_opts from '@core/config/i18n';
-import { SchemaValidationError } from './zod.pipe';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { ZodError } from 'zod';
 import { mockArgumentsHost } from '../../test/utils';
-import { I18nTranslations } from '@generated/i18n';
+import { SchemaValidationError } from './zod.pipe';
+import { Errors, ZodFilter } from './zod.filter';
+import i18n_opts from '@core/config/i18n';
+import type { I18nTranslations } from '@generated/i18n';
 
 describe('ZodFilter', () => {
   let module: TestingModule;

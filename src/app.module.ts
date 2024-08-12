@@ -3,15 +3,15 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from 'nestjs-prisma';
 
+import { I18nModule } from 'nestjs-i18n';
+import { LoggerModule } from 'nestjs-pino';
+import { OpenTelemetryModule } from 'nestjs-otel';
 import opts from './config/app';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
-import { I18nModule } from 'nestjs-i18n';
 import { ValidationModule } from './validation/validation.module';
 import i18n_opts from './config/i18n';
-import { LoggerModule } from 'nestjs-pino';
 import pinoOpts from './config/pino';
-import { OpenTelemetryModule } from 'nestjs-otel';
 
 @Module({
   controllers: [AppController],

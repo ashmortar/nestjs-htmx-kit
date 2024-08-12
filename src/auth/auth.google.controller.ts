@@ -1,10 +1,10 @@
-import { Cookies } from '@core/cookies/cookies.decorator';
 import { Controller, Get, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Request, Response } from 'express';
 import { GoogleOauthGuard } from './google-oauth.guard';
 import { ValidGoogleOauthData } from './google-oauth.strategy';
 import { AuthService } from './auth.service';
+import { Cookies } from '@core/cookies/cookies.decorator';
 
 @Controller('auth/google')
 export class GoogleController {

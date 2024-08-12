@@ -1,20 +1,19 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AuthController } from './auth.controller';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { ConfigModule } from '@nestjs/config';
-import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PrismaService } from 'nestjs-prisma';
-import { prismaMock } from '../../prisma/singleton';
 import { I18nModule } from 'nestjs-i18n';
+import { addDays } from 'date-fns';
+import { prismaMock } from '../../prisma/singleton';
+import { mockRequest } from '../../test/utils';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
 import i18n_opts from '@core/config/i18n';
 import opts from '@core/config/app';
-import {
-  CredentialsService,
-  CredentialWithUserPii,
-} from '@core/credentials/credentials.service';
+import type { CredentialWithUserPii } from '@core/credentials/credentials.service';
+import { CredentialsService } from '@core/credentials/credentials.service';
 import { SessionService } from '@core/session/session.service';
-import { addDays } from 'date-fns';
-import { mockRequest } from '../../test/utils';
 
 describe('AuthController', () => {
   let module: TestingModule;

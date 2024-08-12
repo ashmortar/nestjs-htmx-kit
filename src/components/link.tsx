@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from '@kitajs/html';
 import { ClassName } from './types';
 
 export type LinkProps = ClassName &
@@ -16,7 +17,7 @@ export function Link({
   class: className,
   children,
   ...rest
-}: Html.PropsWithChildren<LinkProps>) {
+}: PropsWithChildren<LinkProps>) {
   const props =
     `href` in rest
       ? { ...rest, target: '_blank', rel: 'noopener noreferrer' }

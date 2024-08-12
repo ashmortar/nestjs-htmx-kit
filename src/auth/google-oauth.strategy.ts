@@ -1,12 +1,11 @@
-import { Config } from '@core/config/app';
-import { PiiType } from '@core/credentials/credentials.service';
-
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { addDays } from 'date-fns';
 
 import { Strategy, VerifyCallback } from 'passport-google-oauth2';
+import { PiiType } from '@core/credentials/credentials.service';
+import { Config } from '@core/config/app';
 
 export type GoogleCredential = {
   type: 'google';
