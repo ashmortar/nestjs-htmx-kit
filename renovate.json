@@ -12,7 +12,7 @@
   "packageRules": [
     {
       "matchPackageNames": ["@kitajs/html", "@kitajs/ts-html-plugin"],
-      "label": "kitajs monorepo"
+      "groupName": "Kitajs"
     }
   ],
   "labels": ["dependencies"]
