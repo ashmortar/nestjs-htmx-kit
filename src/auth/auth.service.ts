@@ -1,14 +1,14 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { ValidGoogleOauthData } from './google-oauth.strategy';
 import { JwtPayload } from './jwt.strategy';
-import { SignInDto } from './schemas/sign-in';
+import { SignInDto } from './validation/schemas/sign-in';
+import { SessionService } from '@core/session/session.service';
 import {
   CredentialsService,
   CredentialWithUserPii,
 } from '@core/credentials/credentials.service';
-import { SessionService } from '@core/session/session.service';
 
 @Injectable()
 export class AuthService {
@@ -24,9 +24,9 @@ export class AuthService {
 
   async oauthSignIn(
     data?: ValidGoogleOauthData,
-  ): Promise<CredentialWithUserPii> {
+  ): Promise<CredentialWithUserPii | null> {
     if (!data) {
-      throw new BadRequestException('Invalid user data');
+      return null;
     }
 
     return this.credentialsService.upsertOauthCredentialUser(data);
@@ -35,12 +35,12 @@ export class AuthService {
   async localSignIn({
     email,
     password,
-  }: SignInDto): Promise<CredentialWithUserPii> {
+  }: SignInDto): Promise<CredentialWithUserPii | null> {
     const credential =
       await this.credentialsService.findLocalUserByEmail(email);
     const valid = await bcrypt.compare(password, credential?.value || '');
     if (!valid || !credential) {
-      throw new BadRequestException('Invalid email or password');
+      return null;
     }
     return credential;
   }
@@ -48,10 +48,10 @@ export class AuthService {
   async localRegister({
     email,
     password,
-  }: SignInDto): Promise<CredentialWithUserPii> {
+  }: SignInDto): Promise<CredentialWithUserPii | null> {
     const existing = await this.credentialsService.findLocalUserByEmail(email);
     if (existing) {
-      throw new BadRequestException('User already exists');
+      return null;
     }
 
     return this.credentialsService.createLocalUser(email, password);

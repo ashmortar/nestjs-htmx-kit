@@ -19,7 +19,7 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@core/*": ["./src/*"],
-      "@generated/*": ["./generated/*"]
+      "@generated/*": ["./src/generated/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "@kitajs/html",

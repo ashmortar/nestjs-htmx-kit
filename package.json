@@ -160,7 +160,7 @@
     "testEnvironment": "node",
     "moduleNameMapper": {
       "@core/(.*)": "<rootDir>/src/$1",
-      "@generated/(.*)": "<rootDir>/generated/$1"
+      "@generated/(.*)": "<rootDir>/src/generated/$1"
     }
   },
   "prisma": {

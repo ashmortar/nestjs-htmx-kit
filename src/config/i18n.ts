@@ -9,14 +9,7 @@ const i18n_opts = {
     watch: true,
   },
   resolvers: [AcceptLanguageResolver],
-  typesOutputPath: path.join(
-    __dirname,
-    '..',
-    '..',
-    'generated',
-    'i18n',
-    'index.ts',
-  ),
+  typesOutputPath: path.join(__dirname, '..', 'generated', 'i18n', 'index.ts'),
 } satisfies I18nOptions;
 
 export default i18n_opts;

@@ -9,7 +9,7 @@ import { OpenTelemetryModule } from 'nestjs-otel';
 import opts from './config/app';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
-import { ValidationModule } from './validation/validation.module';
+
 import i18n_opts from './config/i18n';
 import pinoOpts from './config/pino';
 
@@ -34,7 +34,6 @@ import pinoOpts from './config/pino';
     PrismaModule.forRoot(),
     I18nModule.forRoot(i18n_opts),
     AuthModule,
-    ValidationModule,
   ],
 })
 export class AppModule {}

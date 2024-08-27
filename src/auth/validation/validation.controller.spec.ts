@@ -4,7 +4,7 @@ import { I18nModule } from 'nestjs-i18n';
 import { ValidationController } from './validation.controller';
 import i18n_opts from '@core/config/i18n';
 
-describe('ValidationController', () => {
+describe('AuthValidationController', () => {
   let module: TestingModule;
   let controller: ValidationController;
 
