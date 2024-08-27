@@ -16,7 +16,7 @@ export class SessionService {
   /**
    * Get a user by their JWT payload
    * @param {JwtPayload} jwt - The JWT payload
-   * @returns {Promise<SessionWithUserPii>} The user session with associated User and PII
+   * @returns The user session with associated User and PII
    */
   async getUserByJwt(jwt: JwtPayload) {
     const { sub: id } = jwt;

@@ -1,45 +1,47 @@
 # NestJS Core
 
-This is my core nestjs server application to be extended in other projects. It contains basic user authentication and authorization with abstract user and credential entities are used for magic link, sms,
+This is my core nestjs server application to be extended in other projects.
+It contains basic user authentication and authorization with abstract user
+and credential entities are used for magic link, sms,
 
 ## User Entities and Authentication
 
-##### User
+### User
 
 Is the entry point for authentication, authorization and pii.
 
-##### Credential
+#### Credential
 
 Stores the type and value of a user's credential.
 
-##### Pii
+#### Pii
 
 Stores the user's personal information.
 
-##### LoginAttempt
+#### LoginAttempt
 
 Tracks login attempts to prevent brute force attacks.
 
-##### VerificationToken
+#### VerificationToken
 
 Used for email verification, password reset, magic link and sms verification.
 
-##### Session
+#### Session
 
 Stores the user's session information.
 
-##### Role
+#### Role
 
 Roles that can be assigned to users.
 
-##### Permission
+#### Permission
 
 Permissions that can be assigned to roles.
 
-##### RolePermission
+#### RolePermission
 
 Many to many relationship between roles and permissions.
 
-##### UserRoles
+#### UserRoles
 
 Many to many relationship between users and roles.
